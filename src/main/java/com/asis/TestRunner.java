@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -19,23 +20,20 @@ public class TestRunner {
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
-	
+
 	public static void generateExcel() {
-		//BaseClass.clientData.get
 		String[] client_data = {BaseClass.clientData.get("client_name").trim(), BaseClass.clientData.get("to_date").trim()};
-		//clientData.get("client_name").trim();
-		//clientData.get("to_date").trim();
 		Excel obj = new Excel();
 		obj.createFinancialSummaryExcelWithData("Final_data.xls", BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA,client_data);
 	}
-	
+
 	public static void main(String[] args) throws IOException, InterruptedException, ParseException {
 		// TODO Auto-generated method stub
-		
+
 		ATOdata obj = new ATOdata(); 
-		obj.setupDriver();
-		obj.lauchSite("https://onlineservices.ato.gov.au/onlineservices/");
-		
+		//obj.setupDriver();
+		//obj.lauchSite("https://onlineservices.ato.gov.au/onlineservices/");
+
 		obj.login_ato();
 		obj.clientName();
 		obj.goToQuarterName();
@@ -44,10 +42,11 @@ public class TestRunner {
 		obj.gotoICAStatement();
 		obj.fetchICAStatementData();		
 		obj.tearDown();
-		
+
+	    
 		XeroTesting obj2 = new XeroTesting();
-		obj2.setupDriver();
-		obj2.lauchSite("https://login.xero.com");
+//		obj2.setupDriver();
+//		obj2.lauchSite("https://login.xero.com");
 		obj2.login_xero();
 		obj2.twofactorAuth();
 		obj2.gotoAccountsClick();
@@ -57,20 +56,9 @@ public class TestRunner {
 		obj2.goToAgedPayableSymmary();
 		obj2.balanceSheet();
 		obj2.getXeroData();
-		//obj2.addDummydata();
-		//obj2.tempFuncXero();
-		 obj2.tearDown();
+		obj2.tearDown();			
 		generateExcel();
-		
-		
-		// boolean exist = driver.findElements(By.xpath(//Nothing to show)).size != 0
-		/*if(exist) {
-			0
-		}else {
-			
-		}*/
-		//XeroTesting obj2 = new XeroTesting();
-		//obj2.addDummydata();
+	    
 	}
 
 }
