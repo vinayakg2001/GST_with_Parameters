@@ -1,5 +1,7 @@
 package Pages;
 
+import java.util.HashMap;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -27,7 +29,7 @@ public class XeroAgedRecievableSummaryPage extends BaseClass{
 	WebElement exist;
 	@FindBy(xpath = "//tr//descendant::div[text()='Total']/ancestor::tr/td[9]/span/div")
 	WebElement GST1;
-
+	public static double RecievableAmount = 0.0;
 	// Constructor
 	public XeroAgedRecievableSummaryPage() {	
 		PageFactory.initElements(DriverManager.getDriver(), this); 
@@ -59,13 +61,20 @@ public class XeroAgedRecievableSummaryPage extends BaseClass{
 		update.click();
 	}
 	public void getAgedRecievableValues() {
-		double payableAmount = 0.0;
+		
 		if (exist.isDisplayed()) {
-			payableAmount=0.0;
-			System.out.println(payableAmount);
+			//RecievableAmount=0.0;
+			System.out.println(RecievableAmount);
+			HashMap<String, Double> hm2 = new HashMap<>();
+			hm2.put("Add: GST on Debtors", RecievableAmount);
+			LAST_TABLE_DATA.add(hm2);
+			System.out.println("Add: GST on Debtors");
 		} else { 
-			payableAmount=Double.parseDouble(GST1.getText().replaceAll(",", ""));
-			System.out.println(payableAmount);
+			RecievableAmount=Double.parseDouble(GST1.getText().replaceAll(",", ""));
+			System.out.println(RecievableAmount);
+			HashMap<String, Double> hm2 = new HashMap<>();
+			hm2.put("Add: GST on Debtors", RecievableAmount);
+			LAST_TABLE_DATA.add(hm2);
 		}
 	}
 }

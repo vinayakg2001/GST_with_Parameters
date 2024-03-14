@@ -41,6 +41,7 @@ public class Excel {
 	};
 	public ArrayList<String[]> col_data2 = new ArrayList<>();
 
+	
 
 
 	public ArrayList<ArrayList<QuaterData>> local_row_data = new ArrayList<>();
@@ -390,10 +391,11 @@ public class Excel {
 	public void createFinancialSummaryExcelWithData(
 			String fileName, 
 			ArrayList<ArrayList<QuaterData>> ato_row_data,
-			ArrayList<ArrayList<QuaterData>> p_XERO_DATA, ArrayList<ArrayList<String>> activity_statement_data, 
+			ArrayList<ArrayList<QuaterData>> p_XERO_DATA, 
+			ArrayList<ArrayList<String>> activity_statement_data, 
 			String[] client_data
 			){
-
+		System.out.println("Inside generating excel");
 		String[] table_heading = {"BAS SUMMARY"};
 		String[] client_name = {"Client:",client_data[0]};
 		String[] client_year = {"Year:",client_data[1]};

@@ -12,13 +12,13 @@ import com.asis.util.BaseClass;
 
 import Driver_manager.DriverManager;
 
-public class ATOExtractingICAStatementPage extends BaseClass{
+public class closingATOPage extends BaseClass{
 
 	@FindBy(xpath = "//table[@class='table']/tbody/tr")
 	List<WebElement> tableTr;
 
 	//constructor
-	public ATOExtractingICAStatementPage(){
+	public closingATOPage(){
 		PageFactory.initElements(DriverManager.getDriver(), this);       
 	}
 
@@ -31,22 +31,17 @@ public class ATOExtractingICAStatementPage extends BaseClass{
 //		ArrayList<String> tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
 //		DriverManager.getDriver().switchTo().window(tabs.get(1));
 //	}
-
-	public void extractActivityStatement() {
-		for(WebElement tr : tableTr) {
-			if(tr.isDisplayed()) {
-				List<WebElement> tdData =  tr.findElements(By.tagName("td"));
-				ArrayList<String> tdRowData = new ArrayList<String>();
-				for(WebElement td: tdData) {
-					tdRowData.add(td.getText());
-					System.out.println(td.getText());
-				}
-			}
-		}			
-	}
 	public void closingTabs() {
-		ArrayList<String> tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
-		DriverManager.getDriver().close();
-		DriverManager.getDriver().switchTo().window(tabs.get(0));
+		/*
+		 * ArrayList<String> tabs = new
+		 * ArrayList<>(DriverManager.getDriver().getWindowHandles());
+		 * DriverManager.getDriver().close();
+		 * DriverManager.getDriver().switchTo().window(tabs.get(0));
+		 */
+		//DriverManager.getDriver().switchTo().window(defaultTab);
+	}
+	
+	public void closeBrowser() {
+		DriverManager.getDriver().quit();
 	}
 }

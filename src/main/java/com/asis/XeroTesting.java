@@ -462,7 +462,6 @@ public class XeroTesting extends BaseClass{
 	public void getXeroData() {
 		ArrayList<QuaterData> xero_data = new ArrayList<>();
 		QuaterData xeroObj = new QuaterData("As per the book");
-		//XeroTesting obj=new XeroTesting();
 		xeroObj.set_G1(Double.parseDouble(fetchCaptureA1G1B1Data.get(0)),false);
 		xeroObj.set_1A(Double.parseDouble(fetchCaptureA1G1B1Data.get(1)),false);
 		xeroObj.set_1B(Double.parseDouble(fetchCaptureA1G1B1Data.get(2)),false);

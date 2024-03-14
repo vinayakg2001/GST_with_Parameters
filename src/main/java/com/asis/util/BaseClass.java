@@ -37,6 +37,8 @@ public class BaseClass {
 	public static ArrayList<ArrayList<String>> GST_Reconciliation_DATA = new ArrayList<>();	
 	public static ArrayList<ArrayList<QuaterData>> ATO_ROW_DATA = new ArrayList<>();	
 	public static ArrayList<ArrayList<QuaterData>> XERO_DATA = new ArrayList<>();
+	public static ArrayList<String> fetchCaptureA1G1B1Data=new ArrayList<>();
+
 
 	public static ArrayList<HashMap<String, Double>> LAST_TABLE_DATA = new ArrayList<>();
 
@@ -99,6 +101,10 @@ public class BaseClass {
 	 */
 	public void getQuestAnsw() throws InterruptedException, IOException {
 		CLIENT_XERO_DATA= xeroexcel.getQuestAnsw(XERO_LOGIN_SHEET_NAME);
+
+	}
+	public void getClientDetail() throws InterruptedException, IOException {
+		CLIENT_DATA = ExcelUtil.getClientDetail(ATO_CLIENT_SHEET_NAME);
 
 	}
 	public void login_ato() throws IOException, InterruptedException {// Filling login details

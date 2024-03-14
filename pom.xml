@@ -77,11 +77,11 @@
 			<version>4.17.0</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.asis</groupId>
 			<artifactId>GSTRec</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<!--<dependency>
 			<groupId>org.testng</groupId>

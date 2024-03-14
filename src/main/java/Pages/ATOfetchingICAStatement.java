@@ -49,6 +49,8 @@ public class ATOfetchingICAStatement extends BaseClass {
 	
 	@FindBy(xpath = "//table[@class='table']/tbody/tr")
 	List<WebElement> tableTr;
+	
+	String defaultTab = "";
 
 	// Constructor
 	public ATOfetchingICAStatement() {
@@ -119,6 +121,7 @@ public class ATOfetchingICAStatement extends BaseClass {
 	}
 	public void switchingTabs() {
 		ArrayList<String> tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
+		defaultTab = tabs.get(0);
 		DriverManager.getDriver().switchTo().window(tabs.get(1));
 	}
 	
@@ -129,15 +132,15 @@ public class ATOfetchingICAStatement extends BaseClass {
 				ArrayList<String> tdRowData = new ArrayList<String>();
 				for(WebElement td: tdData) {
 					tdRowData.add(td.getText());
-					System.out.println(td.getText());
 				}
+				ACTIVITY_STATEMENT_DATA.add(tdRowData);
 			}
 		}			
 	}
 	public void closingTabs() {
-		ArrayList<String> tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
-		DriverManager.getDriver().close();
-		DriverManager.getDriver().switchTo().window(tabs.get(0));
+		//ArrayList<String> tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
+		//DriverManager.getDriver().close();
+		DriverManager.getDriver().switchTo().window(defaultTab);
 	}
 }
 

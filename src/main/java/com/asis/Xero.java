@@ -278,13 +278,13 @@ public class Xero {
 		data_excel.dataExcel(recievable_amount, "Sheet1", 31, 3);  //Calling ReadExcel Function (Passing sheet name)
 		data_excel.dataExcel(payable_amount, "Sheet1", 30, 3);  //Calling ReadExcel Function (Passing sheet name)
 		data_excel.dataExcel(GST_asperBalanceSheet, "Sheet1", 34, 3);  //Calling ReadExcel Function (Passing sheet name)
-		WriteExcel we =new WriteExcel();
+		/*WriteExcel we =new WriteExcel();
 		try {
 			we.Read();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();   
-		}
+		}*/
 		System.out.println("writing pdf values data done");
 	}
 	public static WebElement fluentWait(WebDriver driver, By locator) {

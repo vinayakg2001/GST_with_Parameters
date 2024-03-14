@@ -29,7 +29,8 @@ public class XeroAgedPayableSummaryPage extends BaseClass{
 	WebElement exist;
 	@FindBy(xpath = "//tr//descendant::div[text()='Total']/ancestor::tr/td[9]/span/div")
 	WebElement GST2;
-
+	public static double payableAmount = 0.0;
+	public static double Total = 0.0;
 	// Constructor
 	public XeroAgedPayableSummaryPage() {	
 		PageFactory.initElements(DriverManager.getDriver(), this); 
@@ -64,10 +65,22 @@ public class XeroAgedPayableSummaryPage extends BaseClass{
 		double payableAmount = 0.0;
 		if (exist.isDisplayed()) {
 			payableAmount=0.0;
-			System.out.println(payableAmount);
+			//System.out.println(payableAmount);
+			HashMap<String, Double> hm3 = new HashMap<>();
+			hm3.put("Less: GST on Creditors", payableAmount);
+			LAST_TABLE_DATA.add(hm3);
 		} else { 
 			payableAmount=Double.parseDouble(GST2.getText().replaceAll(",", ""));
-			System.out.println(payableAmount);
+			//System.out.println(payableAmount);
+			HashMap<String, Double> hm3 = new HashMap<>();
+			hm3.put("Less: GST on Creditors", payableAmount);
+			LAST_TABLE_DATA.add(hm3);
+
 		}
-	}
+		HashMap<String, Double> hm4 = new HashMap<>();
+		hm4.put("Total", (LAST_TABLE_DATA.get(0).get("June BAS")+ payableAmount+XeroAgedRecievableSummaryPage.RecievableAmount));
+
+		LAST_TABLE_DATA.add(hm4);
+		//System.out.println("total "+LAST_TABLE_DATA.get(3).get("Total"));
+		}
 }

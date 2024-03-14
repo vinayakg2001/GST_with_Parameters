@@ -2,6 +2,7 @@ package MyHooks;
 
 import java.io.IOException;
 
+import com.asis.Excel;
 import com.asis.util.BaseClass;
 import com.asis.util.ExcelUtil;
 import com.asis.util.xeroexcel;
@@ -11,6 +12,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 
 public class AppHooks extends BaseClass{
+	
 	
 	@Before("@readATOExcel")
 	public void readATOExcel() {
@@ -46,11 +48,22 @@ public class AppHooks extends BaseClass{
 		
 	}
 	
-	@After
-	public void afterScenario() {
+	@Before("@add30SecondWait")
+	public void beforeScenariowait30Second() {
 		System.out.println("Running after each scenario");
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@After
+	public void afterScenariowait() {
+		System.out.println("Running after each scenario");
+		try {
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,5 +80,6 @@ public class AppHooks extends BaseClass{
 			e.printStackTrace();
 		}
 	}
+	
 	
 }
