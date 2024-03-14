@@ -85,13 +85,6 @@ public final class xeroexcel {
 			questAns.put("Security_qa3_answer", row.getCell(7).getStringCellValue());
 			questAns.put("From date", row.getCell(8).toString());
 			questAns.put("To date", row.getCell(9).toString());
-//			System.out.println(row.getCell(8));
-//			System.out.println(row.getCell(2));
-
-			
-//			questAns.put("From date", row.getCell(8).toString());
-//			questAns.put("To date", row.getCell(9).toString());
-
 		}
 		return questAns;		
 	}

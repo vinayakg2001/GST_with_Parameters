@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.asis.QuaterData;
 
+import Driver_manager.DriverManager;
+
 public class BaseClass {
 	public WebDriver driver;
 	// File paths and names
@@ -27,27 +29,31 @@ public class BaseClass {
 	public final String ATO_FILE_NAME ="ATO_exel.xlsx";
 	public final String ATO_LOGIN_SHEET_NAME ="Login_detail";
 	public final String ATO_CLIENT_SHEET_NAME ="Client_data";
-	
+
 	public static HashMap<String, String> clientData;
-	
+	public static HashMap<String, String> CLIENT_DATA;
+
 	public static ArrayList<ArrayList<String>> ACTIVITY_STATEMENT_DATA = new ArrayList<>();	
 	public static ArrayList<ArrayList<String>> GST_Reconciliation_DATA = new ArrayList<>();	
 	public static ArrayList<ArrayList<QuaterData>> ATO_ROW_DATA = new ArrayList<>();	
 	public static ArrayList<ArrayList<QuaterData>> XERO_DATA = new ArrayList<>();
-	
+	public static ArrayList<String> fetchCaptureA1G1B1Data=new ArrayList<>();
+
+
 	public static ArrayList<HashMap<String, Double>> LAST_TABLE_DATA = new ArrayList<>();
-	
+
 	public final String XERO_FILE_PATH ="C:\\Excel";
 	public final String XERO_FILE_NAME ="XeroSheet.xlsx";
 	public final String XERO_LOGIN_SHEET_NAME ="Xero";
-	
+	public static HashMap<String, String> CLIENT_XERO_DATA;
+
 	public static ArrayList<String> tempData = new ArrayList<String>();
 	// WebDriver wait instance
-	public WebDriverWait wait;
+	public static WebDriverWait wait;
 
 	// JavascriptExecutor instance
-	public JavascriptExecutor js;
-	
+	public  static JavascriptExecutor js;
+
 	public QuaterData qd_lastJune = new QuaterData("Jun");
 	public QuaterData qd_jul = new QuaterData("Jul");
 	public QuaterData qd_aug = new QuaterData("Aug");
@@ -61,7 +67,7 @@ public class BaseClass {
 	public QuaterData qd_apr = new QuaterData("Apr");
 	public QuaterData qd_may = new QuaterData("May");
 	public QuaterData qd_jun = new QuaterData("Jun");
-	
+
 	public QuaterData qd_1 = new QuaterData("BAS not yet Paid/(Received)");
 	public QuaterData qd_2 = new QuaterData("June BAS (2023)");
 	public QuaterData qd_3 = new QuaterData("Add: GST on Debtors");
@@ -74,59 +80,56 @@ public class BaseClass {
 	/**
 	 * Method to setup WebDriver
 	 */
-	public void setupDriver() {
-		//System.out.println("Driver Setup Done");
-		driver  = new ChromeDriver();
-
+	public static void setupDriver(String browser) {
+		DriverManager.setDriver(browser);
 	}
 	/**
 	 * Method to launch the ATO site
 	 */
 
-	public void lauchSite(String url) {
-		this.driver.get(url);
-		this.driver.manage().window().maximize();
-		this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		js = (JavascriptExecutor) driver;
+	public static void lauchSite(String url) {
+		DriverManager.getDriver().get(url);
+		DriverManager.getDriver().manage().window().maximize();
+		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30));
+		js = (JavascriptExecutor) DriverManager.getDriver();
 	}
-	
-	
-	
-
 	/**
 	 * Method to perform login
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
+	public void getQuestAnsw() throws InterruptedException, IOException {
+		CLIENT_XERO_DATA= xeroexcel.getQuestAnsw(XERO_LOGIN_SHEET_NAME);
+
+	}
+	public void getClientDetail() throws InterruptedException, IOException {
+		CLIENT_DATA = ExcelUtil.getClientDetail(ATO_CLIENT_SHEET_NAME);
+
+	}
 	public void login_ato() throws IOException, InterruptedException {// Filling login details
 		ExcelUtil.readExcel(ATO_FILE_PATH,ATO_FILE_NAME);
-		//Object[][] data;
 		String user_id= ExcelUtil.getUserLoginDetail(ATO_LOGIN_SHEET_NAME);
-
-		System.out.println("login");
-		WebElement myGOV = driver.findElement(By.xpath("//a[@id='btn-myGovID']"));
+		WebElement myGOV = DriverManager.getDriver().findElement(By.xpath("//a[@id='btn-myGovID']"));
 		myGOV.click();
 
-		WebElement emailAddress = driver.findElement(By.xpath("//input[@placeholder='myGovID email']"));
+		WebElement emailAddress = DriverManager.getDriver().findElement(By.xpath("//input[@placeholder='myGovID email']"));
 		emailAddress.sendKeys(user_id);
 
-		WebElement loginButton = driver.findElement(By.xpath("//button[@title='Submit']"));
+		WebElement loginButton = DriverManager.getDriver().findElement(By.xpath("//button[@title='Submit']"));
 		loginButton.click();
 		ExcelUtil.closeExcel();
 	}
-	
+
 	public void login_xero() {
-		// Filling login details
-		//System.out.println("login");
 		xeroexcel.readExcel(XERO_FILE_PATH,XERO_FILE_NAME);
 		String[] loginDetails = xeroexcel.getUserLoginDetail(XERO_LOGIN_SHEET_NAME);
 		String userId = loginDetails[0];
 		String password = loginDetails[1];
 
-		WebElement Emailaddress = driver.findElement(By.id("xl-form-email"));
-		WebElement Password = driver.findElement(By.id("xl-form-password"));
-		WebElement loginButton = driver.findElement(By.id("xl-form-submit"));
+		WebElement Emailaddress = DriverManager.getDriver().findElement(By.id("xl-form-email"));
+		WebElement Password = DriverManager.getDriver().findElement(By.id("xl-form-password"));
+		WebElement loginButton = DriverManager.getDriver().findElement(By.id("xl-form-submit"));
 		Emailaddress.sendKeys(userId);		
 		Password.sendKeys(password);			
 		loginButton.click();
@@ -136,7 +139,7 @@ public class BaseClass {
 	 * Method to quit WebDriver
 	 */
 	public void tearDown() {
-		this.driver.quit();
+		DriverManager.getDriver().quit();
 	}
 
 	public String getClientFromDateAsString(HashMap<String, String> clientData) {

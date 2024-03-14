@@ -1,3 +1,4 @@
+
 /**
  * @auther : Shrikant Rakshe
  * 28 Feb 2024
@@ -48,7 +49,7 @@ public class ATOdata extends BaseClass {
 
 	// WebDriver instance
 
-	
+
 
 
 	/**
@@ -61,14 +62,14 @@ public class ATOdata extends BaseClass {
 		return ExcelUtil.getClientDetail(ATO_CLIENT_SHEET_NAME);
 
 	}
-	
+
 	public void tempFunc() {
 		tempData.add("Testing1");
 		tempData.add("Testing2");
 		tempData.add("Testing3");
 		tempData.add("Testing4");
 		System.out.println(tempData.toString());
-		
+
 	}
 
 	/**
@@ -80,16 +81,12 @@ public class ATOdata extends BaseClass {
 		ExcelUtil.readExcel(ATO_FILE_PATH,ATO_FILE_NAME);
 		clientData = getClientData();
 		ExcelUtil.closeExcel();
-
-		System.out.println(clientData);
 		WebElement clientNameSearch = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type='search']")));
-
 		Thread.sleep(1000);
 
 		clientNameSearch.sendKeys(clientData.get("client_name").trim());
 		Thread.sleep(3000);
 		clientNameSearch.sendKeys(Keys.ENTER);
-		//System.out.println("clientName() run");
 	}
 	/**
 	 * Method to navigate to quarter name
@@ -101,8 +98,6 @@ public class ATOdata extends BaseClass {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		WebElement lodgements = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='menubar']//span[contains(text(),'Lodgments')]"))); 
 		lodgements.click();
-
-		System.out.println("lodgements is clicked");
 
 		List<WebElement> options = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@role='menubar']//span[contains(text(),'Lodgments')]/parent::div/following-sibling::ul/li")));
 		for(WebElement option:options) {
@@ -116,7 +111,6 @@ public class ATOdata extends BaseClass {
 
 		WebElement history = driver.findElement(By.xpath("//div[@class='ato-tab']/ul/li[2]"));
 		history.click();
-
 	}
 
 	/**
@@ -132,14 +126,11 @@ public class ATOdata extends BaseClass {
 		WebElement scrollTo = driver.findElement(By.xpath("//h1/span[contains(text(),'Activity statements')]"));//  
 		js.executeScript("arguments[0].scrollIntoView(true);", scrollTo);
 		Thread.sleep(2000);
-		System.out.println("page scrolled");
-
 
 		WebElement filter = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Filter')]")));
 
 		Actions act = new Actions(driver);
 		act.moveToElement(filter).click().perform();
-		System.out.println("Filter clicked");
 
 		Thread.sleep(1000);
 		// Setting "From" and "To" dates
@@ -179,8 +170,6 @@ public class ATOdata extends BaseClass {
 		String apr_quarter = clientData.get("apr_quarter");
 
 		if(!jul_quater.isBlank()) {
-			//fetch jul data
-			System.out.println(jul_quater);
 			getQquaterData(jul_quater);
 			HashMap<String,Double> data = goToStatementDetail();
 
@@ -212,7 +201,6 @@ public class ATOdata extends BaseClass {
 			ATO_ROW_DATA.add(sept_quater_data_row);
 		}
 		if(!oct_quarter.isBlank()) {
-			System.out.println(oct_quarter);
 			getQquaterData(oct_quarter);
 			HashMap<String,Double> data = goToStatementDetail();
 
@@ -240,7 +228,6 @@ public class ATOdata extends BaseClass {
 			ATO_ROW_DATA.add(dec_quater_data_row);
 		}
 		if(!jan_quarter.isBlank()) {
-			System.out.println(jan_quarter);
 			getQquaterData(jan_quarter);
 			HashMap<String,Double> data = goToStatementDetail();
 
@@ -268,8 +255,6 @@ public class ATOdata extends BaseClass {
 			ATO_ROW_DATA.add(mar_quater_data_row);
 		}
 		if(!apr_quarter.isBlank()) {
-
-			System.out.println(apr_quarter);
 			getQquaterData(apr_quarter);
 			HashMap<String,Double> data = goToStatementDetail();
 
@@ -294,7 +279,7 @@ public class ATOdata extends BaseClass {
 			qd_jun.set_ATO_Total_Refund(qd_jun.get_GST_Refund() + qd_jun.get_4() + qd_jun.get_5A() - qd_jun.get_7D(),true);
 			jun_quater_data_row.add(qd_jun);
 			ATO_ROW_DATA.add(jun_quater_data_row);
-			
+
 			HashMap<String, Double> hm1 = new HashMap<>();
 			hm1.put("June BAS", qd_jun.get_ATO_Total_Refund());
 			LAST_TABLE_DATA.add(hm1);
@@ -304,8 +289,6 @@ public class ATOdata extends BaseClass {
 	public void getXeroData() {
 		ArrayList<QuaterData> xero_data = new ArrayList<>();
 		QuaterData xeroObj = new QuaterData("As per the book");
-//		XeroTesting obj=new XeroTesting();
-//		List<String> ans = obj.captureA1G1B1Data();
 		xeroObj.set_G1(51020.00,false);
 		xeroObj.set_1A(4517.95,false);
 		xeroObj.set_1B(7150.36,false);
@@ -343,12 +326,9 @@ public class ATOdata extends BaseClass {
 
 	public void generateExcel() {
 		String[] client_data = {clientData.get("client_name").trim(), clientData.get("to_date").trim()};
-		//clientData.get("client_name").trim();
-		//clientData.get("to_date").trim();
 		Excel obj = new Excel();
 		obj.createFinancialSummaryExcelWithData("Final_data.xls", ATO_ROW_DATA, XERO_DATA, ACTIVITY_STATEMENT_DATA,client_data);
 	}
-
 
 	/**
 	 * Method to get quarter data
@@ -358,8 +338,6 @@ public class ATOdata extends BaseClass {
 	public void getQquaterData(String quater_statement_name) throws InterruptedException {
 		Thread.sleep(2000);
 		List<WebElement> statements = driver.findElements(By.xpath("//span[contains(text(),'"+quater_statement_name+"')]"));
-		System.out.println("statements_size:"+statements.size());
-
 		if(statements.size() > 1) {
 			for(WebElement ele : statements) {
 				WebElement revision= ele.findElement(By.xpath(".//ancestor::div[@class='table-data-text']//span[contains(text(),'Revision')]"));				
@@ -368,9 +346,6 @@ public class ATOdata extends BaseClass {
 					ele.click();
 					break;
 				}
-				else {
-					System.out.println("Revision is not Visisble");
-				}	
 			}
 		}else {
 			js.executeScript("arguments[0].click();", statements.get(0).findElement(By.xpath(".//parent::a")));
@@ -397,25 +372,19 @@ public class ATOdata extends BaseClass {
 		driver.switchTo().window(tabs.get(1));
 
 		Double _1A = Double.parseDouble(driver.findElement(By.xpath("//td[text()='1A']/parent::tr/td[4]")).getText().replaceAll("[$,]", ""));
-		System.out.println("_1A "+_1A);
 		data.put("1A", _1A);
 
 		Double _1B = Double.parseDouble(driver.findElement(By.xpath("//td[text()='1B']/parent::tr/td[5]")).getText().replaceAll("[$,]", ""));
-		System.out.println("_1B "+_1B);
 		data.put("1B", _1B);
 
 		Double _G1 = Double.parseDouble(driver.findElement(By.xpath("//td[text()='G1']/parent::tr/td[3]")).getText().replaceAll("[$,]", ""));
-		System.out.println("_G1 "+_G1);
 		data.put("G1", _G1);
 
 		Double _W1 = Double.parseDouble(driver.findElement(By.xpath("//td[text()='W1']/parent::tr/td[3]")).getText().replaceAll("[$,]", ""));
-		System.out.println("_W1 "+_W1);
 		data.put("W1", _W1);
 
 		Double _4 = Double.parseDouble(driver.findElement(By.xpath("//td[text()='4']/parent::tr/td[4]")).getText().replaceAll("[$,]", ""));
-		System.out.println("_4 "+_4);
 		data.put("4", _4);
-
 
 		driver.close();
 		driver.switchTo().window(tabs.get(0));
@@ -428,10 +397,9 @@ public class ATOdata extends BaseClass {
 	public void gotoICAStatement() throws InterruptedException {
 		Thread.sleep(2000);
 		js.executeScript("window.scrollBy(0,-250)");
-		
+
 		Thread.sleep(2000);
 		WebElement accountsAnsPayments =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='menubar']//span[contains(text(),'Accounts and payments')]")));
-//		js.executeScript("arguments[0].scrollIntoView(true)", accountsAnsPayments);
 		accountsAnsPayments.click();
 		List<WebElement> options = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@role='menubar']//span[contains(text(),'Accounts and payments')]/parent::div/following-sibling::ul/li")));
 		for(WebElement option:options) {
@@ -446,7 +414,6 @@ public class ATOdata extends BaseClass {
 		WebElement filter =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Filter')]/parent::a")));
 		js.executeScript("arguments[0].scrollIntoView(true)", filter);
 		Thread.sleep(1000);
-
 		filter.click();
 
 		WebElement fromDate =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@id,'from-date')]")));
@@ -456,18 +423,13 @@ public class ATOdata extends BaseClass {
 		WebElement toDate =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@id,'to-date')]")));
 		toDate.clear();
 		toDate.sendKeys(getClientToDateAsString(clientData));
-
-		System.out.println("date entered");
-		//button[contains(text(),'Filter')]
 		WebElement submit =  driver.findElement(By.xpath("//button[contains(text(),'Filter')]"));
 		js.executeScript("arguments[0].click();", submit);
-
-		System.out.println("Submit button clicked");
 
 		WebElement printFriendlyVersion =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Print-friendly version')]")));
 		js.executeScript("arguments[0].click();", printFriendlyVersion);
 	}
-	
+
 	public void fetchICAStatementData() {
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
@@ -487,22 +449,14 @@ public class ATOdata extends BaseClass {
 		}
 		driver.close();
 		driver.switchTo().window(tabs.get(0));
-		/*System.out.println("ACTIVITY_STATEMENT_DATA");
-		for(ArrayList<String> node : ACTIVITY_STATEMENT_DATA) {
-			System.out.println("[");
-			for(String value : node) {
-				System.out.print(value+", ");
-			}
-			System.out.print("]");
-		}*/
-		
+
 	}
 	public static void main(String[] args) throws InterruptedException, IOException, ParseException {
 
 		ATOdata obj = new ATOdata(); 
 
-		obj.setupDriver();
-		obj.lauchSite("https://onlineservices.ato.gov.au/onlineservices/");
+		//obj.setupDriver();
+		//obj.lauchSite("https://onlineservices.ato.gov.au/onlineservices/");
 		obj.login_ato();
 		obj.clientName();
 		obj.goToQuarterName();
