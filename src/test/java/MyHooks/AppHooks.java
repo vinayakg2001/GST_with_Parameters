@@ -10,6 +10,7 @@ import com.asis.util.xeroexcel;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
+import io.cucumber.java.Scenario;
 
 public class AppHooks extends BaseClass{
 	
@@ -43,9 +44,8 @@ public class AppHooks extends BaseClass{
 	}
 	
 	@Before
-	public void beforeScenario() {
-		System.out.println("Running before each scenario");
-		
+	public void beforeScenario(Scenario scenario) {
+		System.out.println("Started scenario -"+scenario.getName());		
 	}
 	
 	@Before("@add30SecondWait")
@@ -60,10 +60,10 @@ public class AppHooks extends BaseClass{
 	}
 	
 	@After
-	public void afterScenariowait() {
-		System.out.println("Running after each scenario");
+	public void afterScenariowait(Scenario scenario) {
+		System.out.println("Eneded scenario - "+scenario.getName());
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class AppHooks extends BaseClass{
 	public void waitBeforeEachStep() {
 		System.out.println("Running before each step");
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

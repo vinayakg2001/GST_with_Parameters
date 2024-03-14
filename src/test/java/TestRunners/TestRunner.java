@@ -7,7 +7,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features={
+		features= {"src/test/resources/Features/"},
+	
+	/*{
 				"src/test/resources/Features/1test_ATOLogin.feature",
 				"src/test/resources/Features/2test_ATOsearchClientName.feature",
 				"src/test/resources/Features/3test_ATOSelectingQuarterDate.feature",
@@ -23,7 +25,7 @@ import io.cucumber.junit.CucumberOptions;
 				"src/test/resources/Features/test4_XeroBalanceSheet.feature",
 				"src/test/resources/Features/test5_XeroGSTReconciliation.feature",
 				 "src/test/resources/Features/test6_GenratingExcel.feature",
-		},
+		},*/
 		glue={"StepDefinition","MyHooks"},
 		plugin = {"pretty"}
 //		tags= "@order1 or @order2 or @order5 or @order6"
