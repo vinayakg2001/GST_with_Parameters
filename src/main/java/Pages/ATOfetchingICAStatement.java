@@ -94,9 +94,7 @@ public class ATOfetchingICAStatement extends BaseClass {
 	}
 
 	public void clickSubmitButton() throws InterruptedException {
-		Thread.sleep(5000);
 		js.executeScript("arguments[0].click();", submit);
-		Thread.sleep(5000);
 	}
 	
 	public void clickPrintFriendlyVersion() {

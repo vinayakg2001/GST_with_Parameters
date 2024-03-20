@@ -75,8 +75,7 @@ public class ATOSelectingQuarterDatePage extends BaseClass{
 
 
 	public void clickOnFilterButtonAfterEnteringDate() throws InterruptedException {
-		Thread.sleep(5000);
 		js.executeScript("arguments[0].click();", filter2);
-		Thread.sleep(5000);
+
 	}
 }
