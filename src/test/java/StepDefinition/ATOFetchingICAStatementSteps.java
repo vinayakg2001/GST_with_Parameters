@@ -48,7 +48,7 @@ public class ATOFetchingICAStatementSteps {
 	}
 
 	@When("User click the Submit button")
-	public void user_click_the_submit_button() {
+	public void user_click_the_submit_button() throws InterruptedException {
 		fetchICAStatement.clickSubmitButton();
 	}
 

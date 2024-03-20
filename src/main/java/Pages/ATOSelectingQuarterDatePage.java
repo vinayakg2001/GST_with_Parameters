@@ -58,43 +58,25 @@ public class ATOSelectingQuarterDatePage extends BaseClass{
 	}
 
 	public void clickOnFilterButton() {
-		//filter.click();
 		js.executeScript("arguments[0].click();", filter);
 	}
 
 	public void enterFromoDate() throws ParseException {
-		DateFormat fromDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH); 
-		DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date from_date = fromDateFormat.parse(CLIENT_DATA.get("from_date"));
-
-		String StringFromDate = outputFormat.format(from_date);
+		String StringFromDate = ATO_FROM_DATE;
 		From.clear();
 		From.sendKeys(StringFromDate);
-		try {
-			ExcelUtil.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void enterToDate() throws ParseException {
-		DateFormat fromDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH); 
-		DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date to_date = fromDateFormat.parse(CLIENT_DATA.get("to_date"));
-		String StringToDate = outputFormat.format(to_date);
+		String StringToDate = ATO_TO_DATE;
 		To.clear();
 		To.sendKeys(StringToDate);
-		try {
-			ExcelUtil.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 
-	public void clickOnFilterButtonAfterEnteringDate() {
+	public void clickOnFilterButtonAfterEnteringDate() throws InterruptedException {
+		Thread.sleep(5000);
 		js.executeScript("arguments[0].click();", filter2);
+		Thread.sleep(5000);
 	}
 }

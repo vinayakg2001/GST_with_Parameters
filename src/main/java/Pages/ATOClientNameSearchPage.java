@@ -34,14 +34,16 @@ public class ATOClientNameSearchPage extends BaseClass{
 	}
 
 	public void enterClientName() {		
-		String client_name = CLIENT_DATA.get("client_name");
+		String client_name = ATO_CLIENT_NAME;
 		clientNameSearch.sendKeys(client_name);
+		/*
 		try {
 			ExcelUtil.closeExcel();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 
 	public void doSearchClientName() {

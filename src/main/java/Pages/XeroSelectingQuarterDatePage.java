@@ -52,53 +52,15 @@ public class XeroSelectingQuarterDatePage extends BaseClass{
 	}
 
 	public void enterFromoDate() throws ParseException {
-		try {
-			getQuestAnsw();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DateFormat fromDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH); 
-		DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-		
-		Date from_date = fromDateFormat.parse(CLIENT_XERO_DATA.get("From date"));
-
-		String StringFromDate = outputFormat.format(from_date);
+		String StringFromDate = XERO_FROM_DATE;
 		From.clear();
 		From.sendKeys(StringFromDate);
-		try {
-			xeroexcel.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void enterToDate() throws ParseException {
-		try {
-			getQuestAnsw();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DateFormat fromDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH); 
-		DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date to_date = fromDateFormat.parse(CLIENT_XERO_DATA.get("To date"));
-		String StringToDate = outputFormat.format(to_date);
+		String StringToDate = XERO_TO_DATE;
 		To.clear();
 		To.sendKeys(StringToDate);
-		try {
-			xeroexcel.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	public void clickUpdateButton() {
 		UpdateButton.click();

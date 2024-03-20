@@ -66,7 +66,7 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 		fetchCaptureA1G1B1Data.add(_4.getText().replaceAll("[,]", ""));
 	}
 	public void generateExcel() {
-		String[] client_data = {BaseClass.CLIENT_DATA.get("client_name").trim(), BaseClass.CLIENT_DATA.get("to_date").trim()};
+		String[] client_data = {ATO_CLIENT_NAME, ATO_TO_DATE};
 		Excel obj = new Excel();
 		obj.createFinancialSummaryExcelWithData("Final_data.xls", BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA,client_data);
 	}

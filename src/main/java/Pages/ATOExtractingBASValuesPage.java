@@ -56,7 +56,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 	}
 
 	public void clickOnJulyQuarter() throws InterruptedException {
-		String jul_quater = CLIENT_DATA.get("jul_quater");
+		String jul_quater = ATO_JULY_QUARTER;
 		if (!jul_quater.isBlank()) {
 			getQquaterData(jul_quater);
 			HashMap<String, Double> data = goToStatementDetail();
@@ -91,7 +91,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 		}
 	}
 	public void clickOnOctQuarter() throws InterruptedException {
-		String oct_quarter = CLIENT_DATA.get("oct_quarter");
+		String oct_quarter = ATO_OCT_QUARTER;
 		if(!oct_quarter.isBlank()) {
 			getQquaterData(oct_quarter);
 			HashMap<String,Double> data = goToStatementDetail();
@@ -121,7 +121,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 		}
 	}
 	public void clickOnJanQuarter() throws InterruptedException {
-		String jan_quarter = CLIENT_DATA.get("jan_quarter");
+		String jan_quarter = ATO_JAN_QUARTER;
 		if(!jan_quarter.isBlank()) {
 			getQquaterData(jan_quarter);
 			HashMap<String,Double> data = goToStatementDetail();
@@ -151,7 +151,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 		}
 	}
 	public void clickOnAprQuarter() throws InterruptedException {
-		String apr_quarter = CLIENT_DATA.get("apr_quarter");
+		String apr_quarter = ATO_APR_QUARTER;
 		if(!apr_quarter.isBlank()) {
 			getQquaterData(apr_quarter);
 			HashMap<String,Double> data = goToStatementDetail();

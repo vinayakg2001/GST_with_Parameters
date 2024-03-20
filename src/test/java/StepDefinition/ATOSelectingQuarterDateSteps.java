@@ -34,7 +34,7 @@ public class ATOSelectingQuarterDateSteps {
 	}
 
 	@Then("User click the Filter button again")
-	public void user_click_the_filter_button_again() {
+	public void user_click_the_filter_button_again() throws InterruptedException {
 		selectDate.clickOnFilterButtonAfterEnteringDate();
 	}
 }

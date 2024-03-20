@@ -38,25 +38,13 @@ public class XeroLoginPage extends BaseClass{
 		return DriverManager.getDriver().getTitle();
 	}
 	public void enterUserId() {
-        xeroexcel.readExcel(XERO_FILE_PATH, XERO_FILE_NAME);
-        String[] userId = xeroexcel.getUserLoginDetail(XERO_LOGIN_SHEET_NAME);
-        Emailaddress.sendKeys(userId[0]);
-        try {
-            xeroexcel.closeExcel();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String userId = XERO_USER_NAME;
+        Emailaddress.sendKeys(userId);
     }
 
     public void enterPassword() {
-        xeroexcel.readExcel(XERO_FILE_PATH, XERO_FILE_NAME);
-        String[] password = xeroexcel.getUserLoginDetail(XERO_LOGIN_SHEET_NAME);
-        Password.sendKeys(password[1]);
-        try {
-            xeroexcel.closeExcel();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String password = XERO_PASSWORD;
+        Password.sendKeys(password);
     }
 	public void clickLoginButton() {
 		loginButton.click();

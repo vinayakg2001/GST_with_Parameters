@@ -15,7 +15,9 @@ import io.cucumber.java.Scenario;
 public class AppHooks extends BaseClass{
 	
 	
-	@Before("@readATOExcel")
+	
+	
+	/*@Before("@readATOExcel")
 	public void readATOExcel() {
 		System.out.println("Reading ato excel ");
 		setProperties();
@@ -43,10 +45,11 @@ public class AppHooks extends BaseClass{
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	@Before
 	public void beforeScenario(Scenario scenario) {
-		System.out.println("Started scenario -"+scenario.getName());		
+		System.out.println("Started scenario -"+scenario.getName());
+		setProperties();
 	}
 	
 	@Before("@add30SecondWait")

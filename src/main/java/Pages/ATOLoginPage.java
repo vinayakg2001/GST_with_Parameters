@@ -35,15 +35,10 @@ public class ATOLoginPage extends BaseClass{
 	}
 
 	public void sendingEmailAddress() {
-		ExcelUtil.readExcel(ATO_FILE_PATH,ATO_FILE_NAME);
-		String user_id= ExcelUtil.getUserLoginDetail(ATO_LOGIN_SHEET_NAME);
+		System.out.println(ATO_USER_NAME);
+		
+		String user_id=ATO_USER_NAME;
 		emailAddress.sendKeys(user_id);
-		try {
-			ExcelUtil.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void clickOnLoginButton() {

@@ -33,18 +33,12 @@ public class XeroSecurityQuestionPage extends BaseClass{
 		return DriverManager.getDriver().getTitle();
 	}
 	public void answerSecurityQuestions() {
-		try {
-			getQuestAnsw();
-		} catch (InterruptedException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String ques1 = CLIENT_XERO_DATA.get("Security_qa1");
-		String ans1 = CLIENT_XERO_DATA.get("Security_qa1_answer");
-		String ques2 = CLIENT_XERO_DATA.get("Security_qs2");
-		String ans2 = CLIENT_XERO_DATA.get("Security_qa2_answer");
-		String ques3 = CLIENT_XERO_DATA.get("Security_qs3");
-		String ans3 = CLIENT_XERO_DATA.get("Security_qa3_answer");
+		String ques1 = XERO_SECURITY_QUEST1;
+		String ans1 = XERO_SECURITY_ANS1;
+		String ques2 = XERO_SECURITY_QUEST2;
+		String ans2 = XERO_SECURITY_ANS2;
+		String ques3 = XERO_SECURITY_QUEST3;
+		String ans3 = XERO_SECURITY_ANS3;
 		
 		if(firstquestion.getText().equals(ques1)) {
 			firstanswer.sendKeys(ans1);
