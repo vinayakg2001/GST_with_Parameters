@@ -21,24 +21,21 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 	WebElement B1;
 	@FindBy(xpath = "//button[contains(text(),'Accounting')]")
 	WebElement accountingButton;
-	@FindBy(xpath = "//a[contains(text(),'Payroll Employee Summary')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'Payroll Employee Summary')]")
 	WebElement payroll_Employee_Summary;
 	
-	@FindBy(xpath = "//div[@id='ext-gen1065']")
+	@FindBy(xpath = "//button[@data-automationid='report-settings-convenience-date-dropdown-button']")
 	WebElement lastQuarter;
-	@FindBy(xpath = "//li[contains(text(),'Last Financial Year')]")
+	@FindBy(xpath = "//span[contains(text(),'Last financial year')]")
 	WebElement lastFinanYear;
-	@FindBy(xpath = "//button[@id='x-update-btnEl']")
+	@FindBy(xpath = "//button[contains(text(),'Update')]")
 	WebElement update;
-	@FindBy(xpath = "//div[@id='displayfield-1036-inputEl']")
+	@FindBy(xpath = "//div[contains(text(),'Total')]/ancestor::tr[1]//td[2]//div")
 	WebElement _W1;
-	@FindBy(xpath = "//div[@id='displayfield-1038-inputEl']")
+	@FindBy(xpath = "//div[contains(text(),'Total')]/ancestor::tr[1]//td[4]//div")
 	WebElement _4;
-	//button[@id='x-update-btnEl']
-	
-	
-	
-	
 	
 	// Constructor
 	public XeroGetActivityStatementValuesPage() {	
@@ -49,7 +46,6 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 		return DriverManager.getDriver().getTitle();
 	}
 	public void captureA1G1B1Data() {
-		
 		fetchCaptureA1G1B1Data.add(G1.getText().replaceAll("[,]", ""));
 		fetchCaptureA1G1B1Data.add(A1.getText().replaceAll("[,]", ""));
 		fetchCaptureA1G1B1Data.add(B1.getText().replaceAll("[,]", ""));
@@ -57,6 +53,7 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 	
 	public void capture4W1B1Data() {
 		accountingButton.click();
+		reports.click();
 		payroll_Employee_Summary.click();
 		lastQuarter.click();
 		lastFinanYear.click();

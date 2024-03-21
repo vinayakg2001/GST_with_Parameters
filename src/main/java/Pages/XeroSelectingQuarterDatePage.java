@@ -21,18 +21,14 @@ public class XeroSelectingQuarterDatePage extends BaseClass{
 	//list of webelements
 	@FindBy(xpath = "//button[@data-name='navigation-menu/accounting']")
 	WebElement accountingButton;
-
-	@FindBy(xpath = "//a[contains(text(),'Activity Statement')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'Activity Statement')]")
 	WebElement activitySatement;
-
-
 	@FindBy(xpath = "//input[@id='fromDate']")
 	WebElement From;
-
-
 	@FindBy(xpath = "//input[@id='dateTo']")
 	WebElement To;
-
 	@FindBy(xpath = "//a[@id='ext-gen27']")
 	WebElement UpdateButton;
 
@@ -46,6 +42,7 @@ public class XeroSelectingQuarterDatePage extends BaseClass{
 	}
 	public void clickAccountingButton() {
 		accountingButton.click();
+		reports.click();
 	}
 	public void clickActivityStatement() {
 		activitySatement.click();

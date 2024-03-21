@@ -13,7 +13,9 @@ public class XeroBalanceSheetPage extends BaseClass{
 
 	@FindBy(xpath = "//button[contains(text(),'Accounting')]")
 	WebElement accountingButton;
-	@FindBy(xpath = "//a[contains(text(),'Balance Sheet')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'Balance Sheet')]")
 	WebElement balanceSheet;
 	@FindBy(xpath = "//tr//descendant::div[contains(text(),'GST')]/ancestor::tr/td[2]//a")
 	WebElement GST;
@@ -30,6 +32,7 @@ public class XeroBalanceSheetPage extends BaseClass{
 
 	public void clickOnAccountingButton() {
 		accountingButton.click();
+		reports.click();
 	}
 	public void clickOnBalanceSheetButton() {
 		balanceSheet.click();

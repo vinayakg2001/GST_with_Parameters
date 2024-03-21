@@ -13,7 +13,9 @@ public class XeroAgedPayableSummaryPage extends BaseClass{
 
 	@FindBy(xpath = "//button[contains(text(),'Accounting')]")
 	WebElement accountingButton;
-	@FindBy(xpath = "//a[contains(text(),'Aged Payables Summary')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'Aged Payables Summary')]")
 	WebElement payable;
 	@FindBy(xpath = "//button[@id='report-settings-columns-button']")
 	WebElement colmSelected;
@@ -42,6 +44,7 @@ public class XeroAgedPayableSummaryPage extends BaseClass{
 
 	public void clickAccountingButton() {
 		accountingButton.click();
+		reports.click();
 	}
 	public void clickPayable() {
 		payable.click();

@@ -13,39 +13,7 @@ import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 
 public class AppHooks extends BaseClass{
-	
-	
-	
-	
-	/*@Before("@readATOExcel")
-	public void readATOExcel() {
-		System.out.println("Reading ato excel ");
-		setProperties();
-		ExcelUtil.readExcel(ATO_FILE_PATH,ATO_FILE_NAME);
-		CLIENT_DATA = ExcelUtil.getClientDetail(ATO_CLIENT_SHEET_NAME);
-		System.out.println(CLIENT_DATA);
-		try {
-			ExcelUtil.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	@Before("@readXEROExcel")
-	public void readXEROExcel() {
-		System.out.println("Reading xero excel ");
-		xeroexcel.readExcel(XERO_FILE_PATH,XERO_FILE_NAME);
-		CLIENT_XERO_DATA = xeroexcel.getQuestAnsw(XERO_LOGIN_SHEET_NAME);
-		System.out.println(CLIENT_XERO_DATA);
-		try {
-			xeroexcel.closeExcel();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
+
 	@Before
 	public void beforeScenario(Scenario scenario) {
 		System.out.println("Started scenario -"+scenario.getName());

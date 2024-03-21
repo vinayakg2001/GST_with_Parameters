@@ -13,7 +13,9 @@ public class XeroAgedRecievableSummaryPage extends BaseClass{
 
 	@FindBy(xpath = "//button[contains(text(),'Accounting')]")
 	WebElement accountingButton;
-	@FindBy(xpath = "//a[contains(text(),'Aged Receivables Summary')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'Aged Receivables Summary')]")
 	WebElement recievable;
 	@FindBy(xpath = "//button[@id='report-settings-columns-button']")
 	WebElement colSelected;
@@ -41,6 +43,7 @@ public class XeroAgedRecievableSummaryPage extends BaseClass{
 
 	public void clickOnAccountingButton() {
 		accountingButton.click();
+		reports.click();
 	}
 	public void clickOnRecievable() {
 		recievable.click();

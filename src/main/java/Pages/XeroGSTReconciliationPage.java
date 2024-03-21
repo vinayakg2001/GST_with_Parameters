@@ -12,7 +12,9 @@ public class XeroGSTReconciliationPage extends BaseClass {
 
 	@FindBy(xpath = "//button[contains(text(),'Accounting')]")
 	WebElement accountingButton;
-	@FindBy(xpath = "//a[contains(text(),'GST Reconciliation')]")
+	@FindBy(xpath = "//a[contains(text(),'Reports')]")
+	WebElement reports;
+	@FindBy(xpath = "//*[@class='report-row-tooltip']//descendant::span[contains(text(),'GST Reconciliation')]")
 	WebElement GSTreconcil;
 	@FindBy(xpath = "//span[contains(text(),'Export')]")
 	WebElement export;
@@ -30,6 +32,7 @@ public class XeroGSTReconciliationPage extends BaseClass {
 
 	public void clickOnAccountingButton() {
 		accountingButton.click();
+		reports.click();
 	}
 	public void clickOnGSTReconciliationButton() {
 		GSTreconcil.click();
