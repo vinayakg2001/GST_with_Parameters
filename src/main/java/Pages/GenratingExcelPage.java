@@ -12,13 +12,24 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import com.asis.Excel;
 import com.asis.QuaterData;
 import com.asis.util.BaseClass;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+import java.util.Properties;
 
 public class GenratingExcelPage extends BaseClass {
+
+	Double reportingVar;
+	Double unknownVar;
 
 	public void getXeroData() {
 		ArrayList<QuaterData> xero_data = new ArrayList<>();
@@ -52,12 +63,15 @@ public class GenratingExcelPage extends BaseClass {
 		HashMap<String, Double> hm8 = new HashMap<>();
 		hm8.put("Reporting variance", variance.get_GST_Refund());
 		LAST_TABLE_DATA.add(hm8);
+		reportingVar=LAST_TABLE_DATA.get(7).get("Reporting variance");
 
 		HashMap<String, Double> hm9 = new HashMap<>();
 		hm9.put("Unknown variance",	LAST_TABLE_DATA.get(5).get("Total - GST as per balance sheet")+
 				LAST_TABLE_DATA.get(6).get("Reason for Variance:")+
 				LAST_TABLE_DATA.get(7).get("Reporting variance"));
 		LAST_TABLE_DATA.add(hm9);
+
+		unknownVar=LAST_TABLE_DATA.get(8).get("Unknown variance");
 
 		ArrayList<QuaterData> bas_relodged_data = new ArrayList<>();
 		QuaterData bas_relodged = new QuaterData("BAS to be relodged for Period ended Jun 23");
@@ -85,23 +99,16 @@ public class GenratingExcelPage extends BaseClass {
 
 		 */
 	}
-	public void generateExcel() {
+	public void generateExcelAndSendEmail(String recipientEmail) {
 		String[] client_data = {ATO_CLIENT_NAME, ATO_TO_DATE};
 		Excel obj = new Excel();
-		obj.createFinancialSummaryExcelWithData("Final_data.xls", BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA,client_data);
-	}
-	
-	public void emailToUser(){
+		String filePath = "Final_data.xls"; // Assuming this is the file path where the Excel file will be generated
+		obj.createFinancialSummaryExcelWithData(filePath, BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA, client_data);
+
+		// Then, send the Excel file as an email attachment
 		String from = "topgst@theoutsourcepro.com.au";
-		// Sender's password
-		String password = "Guf87765" ;
-		// Receiver's email address
-		String senderMail = SENDER_TO;
-		String firstPath = "C:/Users/";
-		String user_name = USERNAME;
-		String secondPath = "/.jenkins/workspace/GST_Reconciliation_Parameters";
-		String finalPath = firstPath+user_name+secondPath;
-		String emailBody="Hello User,\nThank you for using our service and looking forward for more such opportunities/nYour GST file would be in the following folder at this location :    "  +finalPath;
+		String password = "Guf87765";
+		String senderMail = from;
 
 		// Outlook SMTP server configuration
 		Properties props = new Properties();
@@ -118,27 +125,58 @@ public class GenratingExcelPage extends BaseClass {
 		});
 
 		try {
-			// Creating a default MimeMessage object
+			// Creating a MimeMessage object
 			Message message = new MimeMessage(session);
-			// Set From: header field of the header
+			// Set From: header field
 			message.setFrom(new InternetAddress(from));
-			// Set To: header field of the header
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(senderMail));
+			// Set To: header field
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 			// Set Subject: header field
-			message.setSubject("Test Email from Java");
-			// Now set the actual message
-			message.setText(emailBody);
+			message.setSubject("Financial Summary Excel Report");
+
+			// Create a multipart message
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+			Multipart multipart = new MimeMultipart();
+
+			// Set text message part with HTML formatting
+			String emailBody = "<html><body>" +
+			                   "<h2 style=\"color: #007bff;\">Financial Summary Report</h2>" +
+			                   "<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
+			                   "<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
+			                   "<p><b>Reporting Variance:</b> $" + reportingVar + "</p>" +
+			                   "<p><b>Unknown Variance:</b> $" + unknownVar + "</p>" +
+			                   "<p>Hello " +USERNAME + "</p>" +
+			                   "<p>We are pleased to provide you with the Financial Summary Report for your review.</p>" +
+			                   "<p>This report contains essential financial data for the specified year, including reporting and unknown variances.</p>" +
+			                   "<p>Please find the attached Excel file for detailed information.</p>" +
+			                   "<p>If you have any questions or require further assistance, feel free to contact us.</p>" +
+			                   "<br>" +
+			                   "<p>Best regards,</p>" +
+			                   "<p><b> THE OUTSOURCE PRO </b></p>" +
+			                   "</body></html>";
+			// Set content type to HTML
+			messageBodyPart.setContent(emailBody, "text/html");
+			multipart.addBodyPart(messageBodyPart);
+
+			// Part two is attachment
+			messageBodyPart = new MimeBodyPart();
+			DataSource source = new FileDataSource(filePath);
+			messageBodyPart.setDataHandler(new DataHandler(source));
+			messageBodyPart.setFileName("Final_data.xls");
+			multipart.addBodyPart(messageBodyPart);
+
+			// Send the complete message parts
+			message.setContent(multipart);
 
 			// Send message
 			Transport.send(message);
-			System.out.println("Email sent successfully.");
-			System.out.println(firstPath+user_name+secondPath);
-			System.out.println(finalPath);
+			System.out.println("Email with attachment sent successfully to " + recipientEmail);
 		} catch (AuthenticationFailedException e) {
 			System.out.println("Authentication failed. Please check your credentials and try again.");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
 	}
-
 }
+
+

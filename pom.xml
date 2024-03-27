@@ -147,6 +147,9 @@
 							<octQuarter>${octQuarter}</octQuarter>
 							<janQuarter>${janQuarter}</janQuarter>
 							<aprQuarter>${aprQuarter}</aprQuarter>
+							
+							<userNameLaptop>${userNameLaptop}</userNameLaptop>
+							<senderTo>${senderTo}</senderTo>
 						</systemPropertyVariables>
 					</configuration>
 				</plugin>
