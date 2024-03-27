@@ -28,8 +28,14 @@ import java.util.Properties;
 
 public class GenratingExcelPage extends BaseClass {
 
+	Double reportingVarValue;
+	Double unknownVarValue ;
+
+	String formattedUnknownVar;
+	String formattedreportingVar;
+
+	Double unknownVar ;
 	Double reportingVar;
-	Double unknownVar;
 
 	public void getXeroData() {
 		ArrayList<QuaterData> xero_data = new ArrayList<>();
@@ -63,7 +69,10 @@ public class GenratingExcelPage extends BaseClass {
 		HashMap<String, Double> hm8 = new HashMap<>();
 		hm8.put("Reporting variance", variance.get_GST_Refund());
 		LAST_TABLE_DATA.add(hm8);
-		reportingVar=LAST_TABLE_DATA.get(7).get("Reporting variance");
+		
+		reportingVarValue=LAST_TABLE_DATA.get(7).get("Reporting variance");
+		formattedreportingVar = String.format("%.2f", reportingVarValue);
+		reportingVar = Double.parseDouble(formattedreportingVar);
 
 		HashMap<String, Double> hm9 = new HashMap<>();
 		hm9.put("Unknown variance",	LAST_TABLE_DATA.get(5).get("Total - GST as per balance sheet")+
@@ -71,7 +80,9 @@ public class GenratingExcelPage extends BaseClass {
 				LAST_TABLE_DATA.get(7).get("Reporting variance"));
 		LAST_TABLE_DATA.add(hm9);
 
-		unknownVar=LAST_TABLE_DATA.get(8).get("Unknown variance");
+		unknownVarValue = LAST_TABLE_DATA.get(8).get("Unknown variance");
+		formattedUnknownVar = String.format("%.2f", unknownVarValue);
+		unknownVar = Double.parseDouble(formattedUnknownVar);
 
 		ArrayList<QuaterData> bas_relodged_data = new ArrayList<>();
 		QuaterData bas_relodged = new QuaterData("BAS to be relodged for Period ended Jun 23");
@@ -140,20 +151,20 @@ public class GenratingExcelPage extends BaseClass {
 
 			// Set text message part with HTML formatting
 			String emailBody = "<html><body>" +
-			                   "<h2 style=\"color: #007bff;\">Financial Summary Report</h2>" +
-			                   "<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
-			                   "<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
-			                   "<p><b>Reporting Variance:</b> $" + reportingVar + "</p>" +
-			                   "<p><b>Unknown Variance:</b> $" + unknownVar + "</p>" +
-			                   "<p>Hello " +USERNAME + "</p>" +
-			                   "<p>We are pleased to provide you with the Financial Summary Report for your review.</p>" +
-			                   "<p>This report contains essential financial data for the specified year, including reporting and unknown variances.</p>" +
-			                   "<p>Please find the attached Excel file for detailed information.</p>" +
-			                   "<p>If you have any questions or require further assistance, feel free to contact us.</p>" +
-			                   "<br>" +
-			                   "<p>Best regards,</p>" +
-			                   "<p><b> THE OUTSOURCE PRO </b></p>" +
-			                   "</body></html>";
+					"<h2 style=\"color: #007bff;\">Financial Summary Report</h2>" +
+					"<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
+					"<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
+					"<p><b>Reporting Variance:</b> $" + reportingVar + "</p>" +
+					"<p><b>Unknown Variance:</b> $" + unknownVar + "</p>" +
+					"<p>Hello " +USERNAME + "</p>" +
+					"<p>We are pleased to provide you with the Financial Summary Report for your review.</p>" +
+					"<p>This report contains essential financial data for the specified year, " + ATO_FROM_DATE + " to " + ATO_TO_DATE + " including reporting and unknown variances.</p>" +
+					"<p>Please find the attached Excel file for detailed information.</p>" +
+					"<p>If you have any questions or require further assistance, feel free to contact us.</p>" +
+					"<br>" +
+					"<p>Best regards,</p>" +
+//					"<p><b> THE OUTSOURCE PRO </b></p>" +
+					"</body></html>";
 			// Set content type to HTML
 			messageBodyPart.setContent(emailBody, "text/html");
 			multipart.addBodyPart(messageBodyPart);

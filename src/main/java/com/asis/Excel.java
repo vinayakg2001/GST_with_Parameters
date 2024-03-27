@@ -47,6 +47,8 @@ public class Excel {
 			"Refund" } 
 
 	};
+	
+	
 
 	public ArrayList<String[]> col_data2 = new ArrayList<>();
 
@@ -433,7 +435,7 @@ public class Excel {
 		sheet2 = wb.createSheet("ICA Statement");
 
 		createBASSummary(ato_row_data,p_XERO_DATA,sheet1);
-		printICAStatementSheet(activity_statement_data,sheet2,client_data);
+		printICAStatementSheet(activity_statement_data,sheet2,client_data, sheet2);
 
 		Font boldFont = wb.createFont();
 		boldFont.setBold(true);
@@ -616,16 +618,34 @@ public class Excel {
 			e.printStackTrace(); 
 		}
 	}
-	private void printICAStatementSheet(ArrayList<ArrayList<String>> activity_statement_data, Sheet ica_sheet, String[] client_data) {
+	private void printICAStatementSheet(ArrayList<ArrayList<String>> activity_statement_data, Sheet ica_sheet, String[] client_data, Sheet sheetName) {
 		// TODO Auto-generated method stub
+		
+		Font boldFont = wb.createFont();
+		boldFont.setBold(true);
+		CellStyle boldCenterStyle = wb.createCellStyle();
+		boldCenterStyle.setAlignment(HorizontalAlignment.CENTER);
+		boldCenterStyle.setFont(boldFont);
+
 		int start_row = 0;
 		String[][] ica_col_data = { 
 				{ "Activity statement" ,"1"},
 				{client_data[0]}, 
 				{ "Processed Date", "Effective Date","Description", "Debit(DR)","Credit(CR)", "Running Balance" }
 		};
-
-
+		
+		 // Loop through ica_col_data to create column headers
+	    for (int i = 0; i < ica_col_data.length; i++) {
+	        start_row = i;
+	        Row row = ica_sheet.createRow(start_row);
+	        for (int j = 0; j < ica_col_data[i].length; j++) {
+	            Cell cell = row.createCell(j);
+	            cell.setCellValue(ica_col_data[i][j]);
+	            // Apply bold style to column headers
+	            cell.setCellStyle(boldCenterStyle);
+	        }
+	    }
+		/*
 		for(int i = 0; i < ica_col_data.length; i++) {
 			start_row = i;
 			Row row = ica_sheet.createRow(start_row);
@@ -634,7 +654,7 @@ public class Excel {
 				cell.setCellValue(ica_col_data[i][j]); 
 			}
 		}
-
+*/
 		for(ArrayList<String> row_data : activity_statement_data) {
 			start_row++;
 			Row row = ica_sheet.createRow(start_row);
