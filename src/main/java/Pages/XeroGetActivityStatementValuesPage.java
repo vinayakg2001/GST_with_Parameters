@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.asis.Excel;
 import com.asis.util.BaseClass;
@@ -42,8 +43,8 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 		PageFactory.initElements(DriverManager.getDriver(), this); 
 	}
 	//list  of all the actions on page
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 	public void captureA1G1B1Data() {
 		fetchCaptureA1G1B1Data.add(G1.getText().replaceAll("[,]", ""));
@@ -52,11 +53,17 @@ public class XeroGetActivityStatementValuesPage extends BaseClass{
 	}
 	
 	public void capture4W1B1Data() {
+		wait.until(ExpectedConditions.elementToBeClickable(accountingButton));
 		accountingButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(reports));
 		reports.click();
+		wait.until(ExpectedConditions.elementToBeClickable(payroll_Employee_Summary));
 		payroll_Employee_Summary.click();
+		wait.until(ExpectedConditions.elementToBeClickable(lastQuarter));
 		lastQuarter.click();
+		wait.until(ExpectedConditions.elementToBeClickable(lastFinanYear));
 		lastFinanYear.click();
+		wait.until(ExpectedConditions.elementToBeClickable(update));
 		update.click();
 		
 		fetchCaptureA1G1B1Data.add(_W1.getText().replaceAll("[,]", ""));

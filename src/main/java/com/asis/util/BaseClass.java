@@ -52,6 +52,8 @@ public class BaseClass {
 	public static String ATO_JAN_QUARTER="";
 	public static String ATO_APR_QUARTER="";
 
+	public static String USERNAME="";
+	public static String SENDER_TO="";
 
 
 	public final String ATO_LOGIN_SHEET_NAME ="Login_detail";
@@ -93,6 +95,7 @@ public class BaseClass {
 	public QuaterData qd_apr = new QuaterData("Apr");
 	public QuaterData qd_may = new QuaterData("May");
 	public QuaterData qd_jun = new QuaterData("Jun");
+	
 
 	public QuaterData qd_1 = new QuaterData("BAS not yet Paid/(Received)");
 	public QuaterData qd_2 = new QuaterData("June BAS");
@@ -139,6 +142,8 @@ public class BaseClass {
 		ATO_OCT_QUARTER=System.getProperty("octQuarter");
 		ATO_JAN_QUARTER=System.getProperty("janQuarter");
 		ATO_APR_QUARTER=System.getProperty("aprQuarter");
+		USERNAME=System.getProperty("userNameLaptop");
+		SENDER_TO=System.getProperty("senderTo");
 		
 		
 	}

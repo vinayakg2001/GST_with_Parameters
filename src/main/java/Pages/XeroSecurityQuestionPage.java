@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.asis.util.BaseClass;
 import Driver_manager.DriverManager;
 
@@ -29,8 +31,8 @@ public class XeroSecurityQuestionPage extends BaseClass{
 	public XeroSecurityQuestionPage() {
 		PageFactory.initElements(DriverManager.getDriver(), this);
 	}
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 	public void answerSecurityQuestions() {
 		String ques1 = XERO_SECURITY_QUEST1;
@@ -41,26 +43,33 @@ public class XeroSecurityQuestionPage extends BaseClass{
 		String ans3 = XERO_SECURITY_ANS3;
 		
 		if(firstquestion.getText().equals(ques1)) {
+			wait.until(ExpectedConditions.elementToBeClickable(firstanswer));
 			firstanswer.sendKeys(ans1);
 		}
 		else if(firstquestion.getText().equals(ques2)) {
+			wait.until(ExpectedConditions.elementToBeClickable(firstanswer));
 			firstanswer.sendKeys(ans2);
 		}
 		else {
+			wait.until(ExpectedConditions.elementToBeClickable(firstanswer));
 			firstanswer.sendKeys(ans3);
 		}
 
 		if(secondquestion.getText().equals(ques1)) {
+			wait.until(ExpectedConditions.elementToBeClickable(secondanswer));
 			secondanswer.sendKeys(ans1);
 		}
 		else if(secondquestion.getText().equals(ques2)) {
+			wait.until(ExpectedConditions.elementToBeClickable(secondanswer));
 			secondanswer.sendKeys(ans2);
 		}
 		else {
+			wait.until(ExpectedConditions.elementToBeClickable(secondanswer));
 			secondanswer.sendKeys(ans3);
 		}
 	}
 	public void clickSubmitButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(submitAns));
 		submitAns.click();
 	}
 }

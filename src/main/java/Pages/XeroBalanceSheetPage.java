@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.asis.util.BaseClass;
 import Driver_manager.DriverManager;
 
@@ -26,20 +28,21 @@ public class XeroBalanceSheetPage extends BaseClass{
 		PageFactory.initElements(DriverManager.getDriver(), this); 
 	}
 	//list  of all the actions on page
-	public static String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public static void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 
 	public void clickOnAccountingButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(accountingButton));
 		accountingButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(reports));
 		reports.click();
 	}
 	public void clickOnBalanceSheetButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(balanceSheet));
 		balanceSheet.click();
 	}
 	public void fetchingGST() {
-		
-		System.out.println("Printing LAST_TABLE_DATA "+LAST_TABLE_DATA);
 		
 		GST_asperBalanceSheet= Double.parseDouble((GST).getText().replaceAll(",", ""));
 		HashMap<String, Double> hm5 = new HashMap<>();

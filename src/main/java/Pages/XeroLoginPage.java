@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.asis.util.BaseClass;
 import com.asis.util.ExcelUtil;
 import com.asis.util.xeroexcel;
@@ -34,25 +36,30 @@ public class XeroLoginPage extends BaseClass{
 	public XeroLoginPage() {
 		PageFactory.initElements(DriverManager.getDriver(), this);
 	}
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 	public void enterUserId() {
         String userId = XERO_USER_NAME;
+        wait.until(ExpectedConditions.elementToBeClickable(Emailaddress));
         Emailaddress.sendKeys(userId);
     }
 
     public void enterPassword() {
         String password = XERO_PASSWORD;
+        wait.until(ExpectedConditions.elementToBeClickable(Password));
         Password.sendKeys(password);
     }
 	public void clickLoginButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(loginButton));
 		loginButton.click();
 	}
 	public void clickAnotherAuthMethod() {
+		wait.until(ExpectedConditions.elementToBeClickable(anotherAuthMethod));
 		anotherAuthMethod.click();
 	}
 	public void clickSecurityQsn() {
+		wait.until(ExpectedConditions.elementToBeClickable(securityQsn));
 		securityQsn.click();
 	}
 }

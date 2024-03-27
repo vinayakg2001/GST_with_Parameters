@@ -10,6 +10,8 @@ import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.asis.util.BaseClass;
 import com.asis.util.ExcelUtil;
 import com.asis.util.xeroexcel;
@@ -37,29 +39,35 @@ public class XeroSelectingQuarterDatePage extends BaseClass{
 		PageFactory.initElements(DriverManager.getDriver(), this);       
 	}
 	//list  of all the actions on page
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 	public void clickAccountingButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(accountingButton));
 		accountingButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(reports));
 		reports.click();
 	}
 	public void clickActivityStatement() {
+		wait.until(ExpectedConditions.elementToBeClickable(activitySatement));
 		activitySatement.click();
 	}
 
 	public void enterFromoDate() throws ParseException {
 		String StringFromDate = XERO_FROM_DATE;
+		wait.until(ExpectedConditions.elementToBeClickable(From));
 		From.clear();
 		From.sendKeys(StringFromDate);
 	}
 
 	public void enterToDate() throws ParseException {
 		String StringToDate = XERO_TO_DATE;
+		wait.until(ExpectedConditions.elementToBeClickable(To));
 		To.clear();
 		To.sendKeys(StringToDate);
 	}
 	public void clickUpdateButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(UpdateButton));
 		UpdateButton.click();
 	}
 

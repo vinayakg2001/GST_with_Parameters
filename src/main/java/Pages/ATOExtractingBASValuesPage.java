@@ -51,8 +51,8 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 	}
 
 	// list of all the actions on page
-	public static String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public static void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 
 	public void clickOnJulyQuarter() throws InterruptedException {
@@ -215,7 +215,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 		}
 	}
 
-	public HashMap<String, Double> goToStatementDetail() {
+	public HashMap<String, Double> goToStatementDetail() throws InterruptedException {
 		HashMap<String, Double> data = new HashMap<>();
 		scrollDownToGetBASStatement();
 		clickOnPrintFriendlyVersion();
@@ -231,8 +231,9 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 		js.executeScript("arguments[0].scrollIntoView(true);", scrollTo);
 	}
 
-	public void clickOnPrintFriendlyVersion() {
+	public void clickOnPrintFriendlyVersion() throws InterruptedException {
 		//printFriendlyVersion.click();
+		Thread.sleep(1000);
 		js.executeScript("arguments[0].click();",printFriendlyVersion);
 	}
 
@@ -265,6 +266,7 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 	}
 
 	public void clickBackButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(back));
 		back.click();
 	}
 }

@@ -10,22 +10,22 @@ public class ATOSearchClientNameStep {
 	
 	@Given("I am on home page")
 	public void i_am_on_home_page() {
-		System.out.println("clientSearchPage title"+ clientSearchPage.getPageTitle());
+//		System.out.println("clientSearchPage title"+ clientSearchPage.getPageTitle());
 	}
 
 	@When("I enter client name in search box")
-	public void i_enter_client_name_in_search_box() {
+	public void i_enter_client_name_in_search_box() throws InterruptedException {
 		clientSearchPage.enterClientName();
 	}
 
 	@When("I press enter keyword")
-	public void i_press_enter_keyword() {
+	public void i_press_enter_keyword() throws InterruptedException {
 		clientSearchPage.doSearchClientName();
 	}
 
 	@Then("I should land on client home screen")
 	public void i_should_land_on_client_home_screen() {
-		System.out.println("client summay page title"+ clientSearchPage.getPageTitle());
+//		System.out.println("client summay page title"+ clientSearchPage.getPageTitle());
 	}
 	
 	@When("I go to Lodgments")

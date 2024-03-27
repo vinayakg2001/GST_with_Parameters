@@ -45,11 +45,12 @@ public class ATOSelectingQuarterDatePage extends BaseClass{
 		PageFactory.initElements(DriverManager.getDriver(), this);
 	}
 
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 
 	public void clickHistory() {
+		wait.until(ExpectedConditions.elementToBeClickable(history));
 		history.click();
 	}
 
@@ -57,25 +58,31 @@ public class ATOSelectingQuarterDatePage extends BaseClass{
 		js.executeScript("arguments[0].scrollIntoView(true);", scrollTo);
 	}
 
-	public void clickOnFilterButton() {
+	public void clickOnFilterButton() throws InterruptedException {
+		Thread.sleep(1000);
 		js.executeScript("arguments[0].click();", filter);
 	}
 
-	public void enterFromoDate() throws ParseException {
+	public void enterFromoDate() throws ParseException, InterruptedException {
 		String StringFromDate = ATO_FROM_DATE;
-		From.clear();
+		wait.until(ExpectedConditions.elementToBeClickable(From)).clear();
+//		From.clear();
+		Thread.sleep(1000);
 		From.sendKeys(StringFromDate);
 	}
 
-	public void enterToDate() throws ParseException {
+	public void enterToDate() throws ParseException, InterruptedException {
 		String StringToDate = ATO_TO_DATE;
-		To.clear();
+		wait.until(ExpectedConditions.elementToBeClickable(To)).clear();
+//		To.clear();
 		To.sendKeys(StringToDate);
+		Thread.sleep(1000);
 	}
 
 
 	public void clickOnFilterButtonAfterEnteringDate() throws InterruptedException {
 		js.executeScript("arguments[0].click();", filter2);
+		Thread.sleep(2000);
 
 	}
 }

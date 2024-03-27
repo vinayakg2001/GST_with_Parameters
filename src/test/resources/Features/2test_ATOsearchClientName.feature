@@ -1,4 +1,4 @@
-@order2 @add30SecondWait
+@order2 
 Feature: Search for specific client name
 
 	Scenario: I am on homepage and I search for specific name

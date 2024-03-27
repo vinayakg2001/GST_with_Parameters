@@ -8,7 +8,7 @@ public class XeroAgedRecievableSummarySteps {
 
 	@Given("user is on client Aged Recievable summary page")
 	public void user_is_on_client_aged_recievable_summary_page() {
-		System.out.println("XeroAgedRecievableSummaryPage title" +xeroRecievableValues.getPageTitle());
+//		System.out.println("XeroAgedRecievableSummaryPage title" +xeroRecievableValues.getPageTitle());
 	}
 
 	@When("User click on accounting button")

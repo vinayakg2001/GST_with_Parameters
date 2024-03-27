@@ -9,7 +9,7 @@ public class ATOExtractingBASValuesSteps {
 
 	@Given("All the filtered Quarter are visible to user")
 	public void all_the_filtered_quarter_are_visible_to_user() {
-		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
+//		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
 	}
 
 	@When("user click on July Quarter")
@@ -24,7 +24,7 @@ public class ATOExtractingBASValuesSteps {
 	}
 	@Given("All the filtered Quarters are visible to user")
 	public void all_the_filtered_quarters_are_visible_to_user() {
-		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
+//		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
 	}
 
 	@When("user click on October Quarter")
@@ -40,7 +40,7 @@ public class ATOExtractingBASValuesSteps {
 
 	@Given("All the filtered Quarter are visible to the user")
 	public void all_the_filtered_quarter_are_visible_to_the_user() {
-		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
+//		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
 	}
 
 	@When("user click on January Quarter")
@@ -56,7 +56,7 @@ public class ATOExtractingBASValuesSteps {
 
 	@Given("All the filtered Quarters are visible to the user")
 	public void all_the_filtered_quarters_are_visible_to_the_user() {
-		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
+//		System.out.println("ATOExtractingBASValuesPage title"+ ATOExtractingBASValuesPage.getPageTitle());
 	}
 
 	@When("user click on April Quarter")

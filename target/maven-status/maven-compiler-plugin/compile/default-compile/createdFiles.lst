@@ -11,9 +11,11 @@ com\asis\ATOExcel.class
 com\asis\Excel.class
 com\asis\QuaterData.class
 Pages\ATOfetchingICAStatement.class
+com\asis\Main.class
 com\asis\XeroTesting.class
 Pages\XeroGetActivityStatementValuesPage.class
 Pages\XeroAgedPayableSummaryPage.class
+Pages\GenratingExcelPage$1.class
 Pages\XeroGSTReconciliationPage.class
 Pages\XeroLoginPage.class
 Pages\XeroSecurityQuestionPage.class
@@ -26,6 +28,7 @@ Pages\closingATOPage.class
 com\asis\util\ExcelUtil.class
 Pages\ATOClientNameSearchPage.class
 com\asis\util\BaseClass.class
+com\asis\Main$1.class
 Pages\ATOExtractingBASValuesPage.class
 Pages\ATOLoginPage.class
 com\asis\GST_template.class

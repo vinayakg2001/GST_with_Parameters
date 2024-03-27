@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.asis.util.BaseClass;
 import com.asis.util.ExcelUtil;
@@ -35,13 +36,13 @@ public class ATOLoginPage extends BaseClass{
 	}
 
 	public void sendingEmailAddress() {
-		System.out.println(ATO_USER_NAME);
-		
 		String user_id=ATO_USER_NAME;
+		wait.until(ExpectedConditions.elementToBeClickable(emailAddress));
 		emailAddress.sendKeys(user_id);
 	}
 
 	public void clickOnLoginButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(loginButton));
 		loginButton.click();
 	}
 }

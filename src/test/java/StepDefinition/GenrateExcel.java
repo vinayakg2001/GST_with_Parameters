@@ -14,5 +14,6 @@ public class GenrateExcel {
 	@Then("Genrating the final excel")
 	public void genrating_the_final_excel() {
 		genratingExcel.generateExcel();
+		genratingExcel.emailToUser();
 	}
 }

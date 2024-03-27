@@ -38,6 +38,7 @@ public class ATOfetchingICAStatement extends BaseClass {
 	@FindBy(xpath = "//input[contains(@id,'from-date')]")
 	WebElement From;
 
+
 	@FindBy(xpath = "//input[contains(@id,'to-date')]")
 	WebElement To;
 
@@ -46,26 +47,29 @@ public class ATOfetchingICAStatement extends BaseClass {
 
 	@FindBy(xpath = "//button[contains(text(),'Print-friendly version')]")
 	WebElement printFriendlyVersion;
-	
+
 	@FindBy(xpath = "//table[@class='table']/tbody/tr")
 	List<WebElement> tableTr;
-	
+
 	String defaultTab = "";
 
 	// Constructor
 	public ATOfetchingICAStatement() {
 		PageFactory.initElements(DriverManager.getDriver(), this);
 	}
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+		//		return DriverManager.getDriver().getTitle();
 	}
 	public void gotoICAStatement() throws InterruptedException {
+		Thread.sleep(2000);
 		js.executeScript("window.scrollBy(0,-250)");
 	}
-	public void clickAccountsAnsPayments() {
+	public void clickAccountsAnsPayments() throws InterruptedException {
+		Thread.sleep(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(accountsAnsPayments));
 		accountsAnsPayments.click();
 	}
-	public void clickOptions() {
+	public void clickOptions() throws InterruptedException {
 		List<WebElement> options = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@role='menubar']//span[contains(text(),'Accounts and payments')]/parent::div/following-sibling::ul/li")));
 		for(WebElement option:options) {
 			if(option.getText().trim().equalsIgnoreCase("Tax accounts")) {
@@ -75,28 +79,34 @@ public class ATOfetchingICAStatement extends BaseClass {
 		}
 	}
 	public void clickActivityStatements() {
+		wait.until(ExpectedConditions.elementToBeClickable(activityStatements));
 		activityStatements.click();
 	}
-	public void clickFilter() {
+	public void clickFilter() throws InterruptedException {
 		js.executeScript("arguments[0].scrollIntoView(true)", filter);
+		wait.until(ExpectedConditions.elementToBeClickable(filter));
+		Thread.sleep(1000);
 		filter.click();
 	}
 
 	public void enterFromDaate() throws ParseException {
 		String StringFromDate = ATO_FROM_DATE;
+		wait.until(ExpectedConditions.elementToBeClickable(From));
 		From.clear();
 		From.sendKeys(StringFromDate);
 	}
-	public void enterToDate() throws ParseException {
+	public void enterToDate() throws ParseException, InterruptedException {
 		String StringToDate = ATO_TO_DATE;
+		wait.until(ExpectedConditions.elementToBeClickable(To));
 		To.clear();
 		To.sendKeys(StringToDate);
+		Thread.sleep(2000);
 	}
 
 	public void clickSubmitButton() throws InterruptedException {
 		js.executeScript("arguments[0].click();", submit);
 	}
-	
+
 	public void clickPrintFriendlyVersion() {
 		js.executeScript("arguments[0].click();", printFriendlyVersion);
 	}
@@ -105,7 +115,7 @@ public class ATOfetchingICAStatement extends BaseClass {
 		defaultTab = tabs.get(0);
 		DriverManager.getDriver().switchTo().window(tabs.get(1));
 	}
-	
+
 	public void extractActivityStatement() {
 		for(WebElement tr : tableTr) {
 			if(tr.isDisplayed()) {
@@ -119,7 +129,8 @@ public class ATOfetchingICAStatement extends BaseClass {
 		}			
 	}
 	public void closingTabs() {
-		DriverManager.getDriver().switchTo().window(defaultTab);
+//		DriverManager.getDriver().switchTo().window(tabs.get(0));
+				DriverManager.getDriver().switchTo().window(defaultTab);
 	}
 }
 

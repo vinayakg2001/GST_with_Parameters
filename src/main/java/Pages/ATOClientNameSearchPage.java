@@ -29,16 +29,20 @@ public class ATOClientNameSearchPage extends BaseClass{
 	}
 
 	//list  of all the actions on page
-	public String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 
-	public void enterClientName() {		
+	public void enterClientName() throws InterruptedException {		
 		String client_name = ATO_CLIENT_NAME;
+		
+		wait.until(ExpectedConditions.elementToBeClickable(clientNameSearch));
+		Thread.sleep(1000);
 		clientNameSearch.sendKeys(client_name);
 	}
 
-	public void doSearchClientName() {
+	public void doSearchClientName() throws InterruptedException {
+		Thread.sleep(3000);
 		clientNameSearch.sendKeys(Keys.ENTER);
 	}
 }

@@ -19,7 +19,7 @@ public class closingATOPage extends BaseClass{
 
 	//constructor
 	public closingATOPage(){
-		PageFactory.initElements(DriverManager.getDriver(), this);       
+//		PageFactory.initElements(DriverManager.getDriver(), this);       
 	}
 
 	//list  of all the actions on page

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.asis.util.BaseClass;
 import Driver_manager.DriverManager;
 
@@ -37,30 +39,39 @@ public class XeroAgedRecievableSummaryPage extends BaseClass{
 		PageFactory.initElements(DriverManager.getDriver(), this); 
 	}
 	//list  of all the actions on page
-	public static String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
+	public static void getPageTitle() {
+//		return DriverManager.getDriver().getTitle();
 	}
 
 	public void clickOnAccountingButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(accountingButton));
 		accountingButton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(reports));
+//		accountingButton.click();
 		reports.click();
 	}
 	public void clickOnRecievable() {
+		wait.until(ExpectedConditions.elementToBeClickable(recievable));
 		recievable.click();
 	}
 	public void clickOnColmSelected() {
+		wait.until(ExpectedConditions.elementToBeClickable(colSelected));
 		colSelected.click();
 	}
 	public void clickOnOutstanding_GST() {
+		wait.until(ExpectedConditions.elementToBeClickable(outstanding_gst_rec));
 		outstanding_gst_rec.click();
 	}
 	public void clickOnEndOfMonth() {
+		wait.until(ExpectedConditions.elementToBeClickable(end_of_month));
 		end_of_month.click();
 	}
 	public void clickOnLastFinancialYear() {
+		wait.until(ExpectedConditions.elementToBeClickable(last_financial_year));
 		last_financial_year.click();
 	}
 	public void clickOnUpdate() {
+		wait.until(ExpectedConditions.elementToBeClickable(update));
 		update.click();
 	}
 	public void getAgedRecievableValues() {
