@@ -4,12 +4,10 @@ import javax.mail.MessagingException;
 
 import com.asis.util.BaseClass;
 import Pages.ATOExtractingBASValuesPage;
-import Pages.pdfFormatPage;
 import io.cucumber.java.en.*;
 
 public class ATOExtractingBASValuesSteps {
 	public ATOExtractingBASValuesPage dataValues  = new ATOExtractingBASValuesPage();
-	public pdfFormatPage pdfFormat  = new pdfFormatPage();
 
 
 	@Given("All the filtered Quarter are visible to user")
@@ -21,14 +19,6 @@ public class ATOExtractingBASValuesSteps {
 	public void user_click_on_quarter() throws InterruptedException, MessagingException {
 		dataValues.clickOnJulyQuarter();
 		System.out.println("quarter statement");
-        String textContent = "Sample text content extracted from activityStatement1 WebElement"; // Replace with your actual text content
-        byte[] pdfContent = pdfFormatPage.createPDF(textContent);
-        String recipientEmail = BaseClass.SENDER_TO ;  // Replace with recipient's email
-        if (pdfContent != null) {
-            pdfFormatPage.sendEmailWithAttachment(pdfContent, recipientEmail);
-        } else {
-            System.out.println("Failed to create PDF content.");
-        }
 		System.out.println("");
 	}
 
