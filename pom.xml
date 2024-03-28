@@ -81,6 +81,11 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version> <!-- or the latest version available -->
 		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.24</version> <!-- Or the latest version available -->
+		</dependency>
 
 
 		<!--<dependency>
@@ -147,7 +152,7 @@
 							<octQuarter>${octQuarter}</octQuarter>
 							<janQuarter>${janQuarter}</janQuarter>
 							<aprQuarter>${aprQuarter}</aprQuarter>
-							
+
 							<userNameLaptop>${userNameLaptop}</userNameLaptop>
 							<senderTo>${senderTo}</senderTo>
 						</systemPropertyVariables>

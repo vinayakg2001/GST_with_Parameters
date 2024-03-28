@@ -117,7 +117,7 @@ public class GenratingExcelPage extends BaseClass {
 		obj.createFinancialSummaryExcelWithData(filePath, BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA, client_data);
 
 		// Then, send the Excel file as an email attachment
-		String from = "topgst@theoutsourcepro.com.au";
+		String from = "topfinancial@theoutsourcepro.com.au";
 		String password = "Guf87765";
 		String senderMail = from;
 
