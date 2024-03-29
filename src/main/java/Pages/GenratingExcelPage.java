@@ -69,7 +69,7 @@ public class GenratingExcelPage extends BaseClass {
 		HashMap<String, Double> hm8 = new HashMap<>();
 		hm8.put("Reporting variance", variance.get_GST_Refund());
 		LAST_TABLE_DATA.add(hm8);
-		
+
 		reportingVarValue=LAST_TABLE_DATA.get(7).get("Reporting variance");
 		formattedreportingVar = String.format("%.2f", reportingVarValue);
 		reportingVar = Double.parseDouble(formattedreportingVar);
@@ -112,8 +112,9 @@ public class GenratingExcelPage extends BaseClass {
 	}
 	public void generateExcelAndSendEmail(String recipientEmail) {
 		String[] client_data = {ATO_CLIENT_NAME, ATO_TO_DATE};
+		String excelName = ATO_CLIENT_NAME;
 		Excel obj = new Excel();
-		String filePath = "Final_data.xls"; // Assuming this is the file path where the Excel file will be generated
+		String filePath =  "Final_data.xls"; // Assuming this is the file path where the Excel file will be generated
 		obj.createFinancialSummaryExcelWithData(filePath, BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA, client_data);
 
 		// Then, send the Excel file as an email attachment
@@ -143,28 +144,34 @@ public class GenratingExcelPage extends BaseClass {
 			// Set To: header field
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 			// Set Subject: header field
-			message.setSubject("Financial Summary Excel Report");
+			message.setSubject("Financial Summary Excel Report "  +ATO_CLIENT_NAME);
 
 			// Create a multipart message
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
 			Multipart multipart = new MimeMultipart();
 
-			// Set text message part with HTML formatting
-			String emailBody = "<html><body>" +
-					"<h2 style=\"color: #007bff;\">Financial Summary Report</h2>" +
-					"<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
-					"<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
-					"<p><b>Reporting Variance:</b> $" + reportingVar + "</p>" +
-					"<p><b>Unknown Variance:</b> $" + unknownVar + "</p>" +
-					"<p>Hello " +USERNAME + "</p>" +
-					"<p>We are pleased to provide you with the Financial Summary Report for your review.</p>" +
-					"<p>This report contains essential financial data for the specified year, " + ATO_FROM_DATE + " to " + ATO_TO_DATE + " including reporting and unknown variances.</p>" +
-					"<p>Please find the attached Excel file for detailed information.</p>" +
-					"<p>If you have any questions or require further assistance, feel free to contact us.</p>" +
-					"<br>" +
-					"<p>Best regards,</p>" +
-//					"<p><b> THE OUTSOURCE PRO </b></p>" +
-					"</body></html>";
+			String emailBody = "<html><body style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; line-height: 1.2; color: #333333;\">" +
+	                  "<h2 style=\"font-weight: bold;\">Financial Summary Report</h2>" +
+	                  "<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
+	                  "<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
+	                  "<p><b>Reporting Variance:</b> <span style=\"color: #ff6347;\">$" + reportingVar + "</span></p>" +
+	                  "<p><b>Unknown Variance:</b> <span style=\"color: #ff6347;\">$" + unknownVar + "</span></p>" +
+	                  "<p>Hello " + USERNAME + ",</p>" +
+	                  "<p>We are pleased to provide you with the <b>Financial Summary Report</b> for your review. This report contains essential financial data for the specified year, from " + ATO_FROM_DATE + " to " + ATO_TO_DATE + ", including reporting and unknown variances.</p>" +
+	                  "<p>This comprehensive report has been meticulously prepared by our team of financial experts, and we trust it will assist you in making informed decisions for your business.</p>" +
+	                  "<p>Please take a moment to review the attached Excel file, which contains detailed information and analysis. Should you have any questions or require further clarification on any aspect of the report, please do not hesitate to reach out to us.</p>" +
+	                  "<p>Your feedback is valuable to us, and we welcome any comments or suggestions you may have regarding the report or our services.</p>" +
+	                  "<p>Thank you for choosing AccountTECH for your financial needs. We look forward to continuing to support you in achieving your business goals.</p>" +
+	                  "<p style=\"font-weight: bold;\">AccountTECH Team</p>" +
+	                  "<p style=\"font-weight: bold;\">The Outsource Pro</p>" +
+	                  "<p>Contact Information:</p>" +
+	                  "<p>Email: topfinancial@theoutsourcepro.com.au</p>" +
+	                  "<p>Phone: +91 6283289834</p>" +
+	                  "<p>Website: <a href=\"https://theoutsourcepro.com.au\">theoutsourcepro.com.au</a></p>" +
+	                  "</body></html>";
+
+
+			
 			// Set content type to HTML
 			messageBodyPart.setContent(emailBody, "text/html");
 			multipart.addBodyPart(messageBodyPart);
@@ -173,7 +180,7 @@ public class GenratingExcelPage extends BaseClass {
 			messageBodyPart = new MimeBodyPart();
 			DataSource source = new FileDataSource(filePath);
 			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName("Final_data.xls");
+			messageBodyPart.setFileName(excelName+".xls");
 			multipart.addBodyPart(messageBodyPart);
 
 			// Send the complete message parts

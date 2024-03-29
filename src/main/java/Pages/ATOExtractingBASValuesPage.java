@@ -41,6 +41,9 @@ public class ATOExtractingBASValuesPage extends BaseClass {
 
 	@FindBy(xpath = "//td[text()='4']/parent::tr/td[4]")
 	WebElement _4;
+	
+	@FindBy(xpath = "//div//a[@class='print-link']")
+	WebElement print;
 
 	@FindBy(xpath = "//button[@class='ato-button btn btn-default btnHalf']")
 	WebElement back;
