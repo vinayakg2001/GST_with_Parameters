@@ -112,13 +112,13 @@ public class GenratingExcelPage extends BaseClass {
 	}
 	public void generateExcelAndSendEmail(String recipientEmail) {
 		String[] client_data = {ATO_CLIENT_NAME, ATO_TO_DATE};
-		String excelName = ATO_CLIENT_NAME;
+		String excelName = ATO_CLIENT_NAME+" "+ATO_TO_DATE;
 		Excel obj = new Excel();
 		String filePath =  "Final_data.xls"; // Assuming this is the file path where the Excel file will be generated
 		obj.createFinancialSummaryExcelWithData(filePath, BaseClass.ATO_ROW_DATA, BaseClass.XERO_DATA, BaseClass.ACTIVITY_STATEMENT_DATA, client_data);
 
 		// Then, send the Excel file as an email attachment
-		String from = "topfinancial@theoutsourcepro.com.au";
+		String from = "toptechautomation@theoutsourcepro.com.au";
 		String password = "Guf87765";
 		String senderMail = from;
 
@@ -144,34 +144,44 @@ public class GenratingExcelPage extends BaseClass {
 			// Set To: header field
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
 			// Set Subject: header field
-			message.setSubject("Financial Summary Excel Report "  +ATO_CLIENT_NAME);
+			message.setSubject("BAS Summary of "  +ATO_CLIENT_NAME);
 
 			// Create a multipart message
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
 			Multipart multipart = new MimeMultipart();
 
-			String emailBody = "<html><body style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; line-height: 1.2; color: #333333;\">" +
-	                  "<h2 style=\"font-weight: bold;\">Financial Summary Report</h2>" +
-	                  "<p><b>Client Name:</b> " + ATO_CLIENT_NAME + "</p>" +
-	                  "<p><b>Year:</b> " + ATO_TO_DATE + "</p>" +
-	                  "<p><b>Reporting Variance:</b> <span style=\"color: #ff6347;\">$" + reportingVar + "</span></p>" +
-	                  "<p><b>Unknown Variance:</b> <span style=\"color: #ff6347;\">$" + unknownVar + "</span></p>" +
-	                  "<p>Hello " + USERNAME + ",</p>" +
-	                  "<p>We are pleased to provide you with the <b>Financial Summary Report</b> for your review. This report contains essential financial data for the specified year, from " + ATO_FROM_DATE + " to " + ATO_TO_DATE + ", including reporting and unknown variances.</p>" +
-	                  "<p>This comprehensive report has been meticulously prepared by our team of financial experts, and we trust it will assist you in making informed decisions for your business.</p>" +
-	                  "<p>Please take a moment to review the attached Excel file, which contains detailed information and analysis. Should you have any questions or require further clarification on any aspect of the report, please do not hesitate to reach out to us.</p>" +
-	                  "<p>Your feedback is valuable to us, and we welcome any comments or suggestions you may have regarding the report or our services.</p>" +
-	                  "<p>Thank you for choosing AccountTECH for your financial needs. We look forward to continuing to support you in achieving your business goals.</p>" +
-	                  "<p style=\"font-weight: bold;\">AccountTECH Team</p>" +
-	                  "<p style=\"font-weight: bold;\">The Outsource Pro</p>" +
-	                  "<p>Contact Information:</p>" +
-	                  "<p>Email: topfinancial@theoutsourcepro.com.au</p>" +
-	                  "<p>Phone: +91 6283289834</p>" +
-	                  "<p>Website: <a href=\"https://theoutsourcepro.com.au\">theoutsourcepro.com.au</a></p>" +
-	                  "</body></html>";
+			String emailBody = "<html><body style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; line-height: 1.5; color: #333;\">"
+	                + "<h2 style=\"font-weight: bold; margin-bottom: 5px;\">Financial Summary Report</h2>"
+	                + "<table border=\"1\" style=\"border-collapse: collapse; margin-bottom: 10px;\">"
+	                + "<tr>"
+	                + "<th style=\"background-color: #d3f3ce; padding: 8px;\">Client Name</th>"
+	                + "<th style=\"background-color: #d3f3ce; padding: 8px;\">Year</th>"
+	                + "<th style=\"background-color: #d3f3ce; padding: 8px;\">Reporting Variance</th>"
+	                + "<th style=\"background-color: #d3f3ce; padding: 8px;\">Unknown Variance</th>"
+	                + "</tr>"
+	                + "<tr>"
+	                + "<td style=\"padding: 8px;\">" + ATO_CLIENT_NAME + "</td>"
+	                + "<td style=\"padding: 8px;\">" + ATO_TO_DATE + "</td>"
+	                + "<td style=\"padding: 8px; color: #ff6347;\">$" + reportingVar + "</td>"
+	                + "<td style=\"padding: 8px; color: #ff6347;\">$" + unknownVar + "</td>"
+	                + "</tr>"
+	                + "</table>"
+	                + "<p style=\"margin-bottom: 15px;\">Hello " + USERNAME + ",</p>"
+	                + "<p style=\"margin-bottom: 15px;\">We are pleased to provide you with the <b>Financial Summary Report</b> for your review. This report contains essential financial data for the specified year, from " + ATO_FROM_DATE + " to " + ATO_TO_DATE + ", including reporting and unknown variances.</p>"
+	                + "<p style=\"margin-bottom: 15px;\">This comprehensive report has been meticulously prepared by our team of financial experts, and we trust it will assist you in making informed decisions for your business.</p>"
+	                + "<p style=\"margin-bottom: 15px;\">Please take a moment to review the attached Excel file, which contains detailed information and analysis. Should you have any questions or require further clarification on any aspect of the report, please do not hesitate to reach out to us.</p>"
+	                + "<p style=\"margin-bottom: 15px;\">Your feedback is valuable to us, and we welcome any comments or suggestions you may have regarding the report or our services.</p>"
+	                + "<p style=\"margin-bottom: 15px;\">Thank you for choosing TOP TECH for your financial needs. We look forward to continuing to support you in achieving your business goals.</p>"
+	                + "<p style=\"font-weight: bold; margin-bottom: 5px;\">TEAM TITANS </p>"
+	                + "<p style=\"font-weight: bold; margin-bottom: 5px;\">The Outsource Pro</p>"
+	                + "<p style=\"margin-bottom: 5px;\">Contact Information:</p>"
+	                + "<p style=\"margin-bottom: 5px;\">Email: topfinancial@theoutsourcepro.com.au</p>"
+	                + "<p style=\"margin-bottom: 5px;\">Phone: +91 6283289834</p>"
+	                + "<p style=\"margin-bottom: 5px;\">Website: <a href=\"https://theoutsourcepro.com.au\" style=\"color: #333;\">theoutsourcepro.com.au</a></p>"
+	                + "</body></html>";
 
 
-			
+
 			// Set content type to HTML
 			messageBodyPart.setContent(emailBody, "text/html");
 			multipart.addBodyPart(messageBodyPart);

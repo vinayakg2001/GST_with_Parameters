@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -23,7 +23,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import java.awt.Color;
 import com.asis.util.BaseClass;
 
 
@@ -45,7 +44,6 @@ public class Excel {
 					"W/holding", "Instalment", "Credit", "Payment" },
 			{ "", "(G1)", "(G3)", "(1A)", "(G10)", "(G11)", "(1B)", "Refund", "(W1)", "(4)", "(5A)", "(7D)",
 			"Refund" } 
-
 	};
 	
 	
@@ -369,19 +367,20 @@ public class Excel {
 		Row headRow = sheetName.createRow(start_row);
 
 		// Create a cell style with bold font
-		CellStyle boldStyle = sheetName.getWorkbook().createCellStyle();
+		CellStyle boldGreenStyle = sheetName.getWorkbook().createCellStyle();
 		Font boldFont = sheetName.getWorkbook().createFont();
 		boldFont.setBold(true);
-		boldStyle.setFont(boldFont);
+		boldGreenStyle.setFont(boldFont);
+		boldGreenStyle.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
+		boldGreenStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		Cell headRowCol1 = headRow.createCell(0);
 		headRowCol1.setCellValue("BAS not yet Paid/(Received)"); 
-		headRowCol1.setCellStyle(boldStyle); 
+		headRowCol1.setCellStyle(boldGreenStyle);
 
 		Cell headRowCol2 = headRow.createCell(1);
 		headRowCol2.setCellValue("GST");
-		headRowCol2.setCellStyle(boldStyle); 
-
+		headRowCol2.setCellStyle(boldGreenStyle); 
 		for(HashMap<String, Double> entry : BaseClass.LAST_TABLE_DATA) {
 			start_row++;
 
@@ -390,11 +389,11 @@ public class Excel {
 			for(String key: entry.keySet()) {
 				Cell xero_key = xero_row.createCell(col_start);
 				xero_key.setCellValue(key); 
-				xero_key.setCellStyle(boldStyle);
 				col_start =col_start+1;
 
 				Cell xero_val = xero_row.createCell(col_start);
 				xero_val.setCellValue(entry.get(key));
+				col_start++;
 			}
 		}
 		/*====================End of last section===================================*/
